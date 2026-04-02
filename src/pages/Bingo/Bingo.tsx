@@ -11,21 +11,19 @@ const Bingo: React.FC = () => {
     
     <div className="relative w-full h-115 sm:h-180 overflow-hidden bg-[#49360d] flex flex-col items-center justify-start">
 
-      {/* 🌟 Radial Glow */}
+
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,#734c2d_0%,#2A2211_80%)] opacity-80" />
 
-      {/* 🪙 Coins Background */}
       <div
         className="absolute inset-0 z-10 bg-size-[125%] sm:bg-cover bg-center bg-no-repeat opacity-90"
         style={{ backgroundImage: `url(${assets.bingo})` }}
       />
 
-      {/* ✨ LIGHT RAYS */}
       <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
         <div className="w-150 h-150 bg-[radial-gradient(circle,rgba(255,255,255,0.15)_0%,transparent_70%)]" />
       </div>
 
-      {/* 📝 TEXT */}
+
       <div className="relative z-20 flex flex-col items-center text-center mt-16 sm:mt-20 md:mt-24 px-4">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#d4af37]">
           Bingo
@@ -36,7 +34,7 @@ const Bingo: React.FC = () => {
         </p>
       </div>
 
-      {/* 🎱 BALLS */}
+
       <div className="relative z-20 flex justify-center md:-mt-10">
         <img
           src={assets.bingoball}
@@ -46,8 +44,6 @@ const Bingo: React.FC = () => {
       </div>
 
     </div>
-
-    {/* 🔴 YOUR ORIGINAL CODE ENDS */}
 
   </div>
 </div>

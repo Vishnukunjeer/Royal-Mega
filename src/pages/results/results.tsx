@@ -24,11 +24,9 @@ const Result = () => {
   const minutes = (Math.floor((timeLeft % 3600) / 60));
   const seconds = (timeLeft % 60);
 
-   const menu = [
-    { name: "Lottery" }]
 
     const [menuOpen, setMenuOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState("Result")
+    
   
     useEffect(() => {
       const timer = setInterval(() => {

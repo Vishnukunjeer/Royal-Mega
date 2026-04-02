@@ -1,11 +1,9 @@
 import React from 'react';
 import { Facebook, Twitter, Instagram, Youtube, Linkedin } from 'lucide-react';
 import { assets } from '@/assets/assets';
+import type { NavLink } from '@/types';
 
-interface NavLink {
-  label: string;
-  href: string;
-}
+
 
 type FooterProps = {
   className?: string;

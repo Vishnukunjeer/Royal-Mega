@@ -12,7 +12,17 @@ export interface LoginCardProps {
   setShowPassword: (v: boolean) => void;
   navigate: any;
 }
-
+export interface NavLink {
+  label: string;
+  href: string;
+}
+export interface Draw {
+  id: string;
+  name: string;
+  prize: string;
+  date: string;
+  image:string;
+}
 export interface CardProps {
   title: string;
   description: string;

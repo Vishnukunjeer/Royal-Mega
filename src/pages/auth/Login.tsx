@@ -24,23 +24,20 @@ const handleLogin = () => {
     email === DUMMY_ADMIN.email &&
     password === DUMMY_ADMIN.password
   ) {
-    // store login state
+
     localStorage.setItem("isAuth", "true")
     localStorage.setItem("user", JSON.stringify(DUMMY_USER))
 
-    alert("Login Successful 🎉")
 
-    // redirect
     navigate("/dashboard")
   } else {
-    alert("Invalid email or password ❌")
+    alert("Invalid email or password")
   }
 }
 
   return (
     <div className="flex min-h-screen bg-black">
-      
-      {/* LEFT PANEL */}
+
       <div className="w-full md:w-[40%] flex items-center justify-center px-6">
         <div className="w-full max-w-md">
           
@@ -52,7 +49,6 @@ const handleLogin = () => {
 
           <div className="space-y-5 text-white">
 
-            {/* Email */}
             <div>
               <label className="text-xs text-gray-400">
                 Email or mobile *
@@ -65,7 +61,6 @@ const handleLogin = () => {
               />
             </div>
 
-            {/* Password */}
             <div>
               <div className="flex justify-between text-xs text-gray-400">
                 <span>Password *</span>
@@ -92,7 +87,7 @@ const handleLogin = () => {
               </div>
             </div>
 
-            {/* Button */}
+
             <button
               onClick={handleLogin}
               className="w-full py-3 rounded-full font-bold text-black bg-linear-to-r from-[#E3BA5D] via-[#FFDEAC] to-[#D4AC54] shadow-lg hover:scale-105 transition"
@@ -111,23 +106,18 @@ const handleLogin = () => {
         </div>
       </div>
 
-      {/* RIGHT PANEL */}
       <div className="hidden md:flex w-[60%] relative overflow-hidden">
-        
-        {/* Background */}
+
         <img
           src={assets.Login}
           alt="casino"
           className="w-full h-full object-cover"
         />
 
-        {/* DARK OVERLAY */}
         <div className="absolute inset-0 bg-black/40" />
 
-        {/* CONTENT */}
         <div className="absolute top-20 left-16 text-white max-w-md z-10">
           
-          {/* Black Box like your UI */}
           <div className="bg-black/70 backdrop-blur-md px-5 py-4 rounded-lg">
             <h1 className="text-3xl font-bold mb-2">
               Welcome back,

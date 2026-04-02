@@ -8,7 +8,6 @@ const About = () => {
       
       <Header />
 
-      {/* 🔶 HERO SECTION */}
       <div className="max-w-7xl mx-auto px-6 py-20 flex flex-col lg:flex-row items-center gap-12">
 
         <div
@@ -29,7 +28,6 @@ const About = () => {
                 }}
               />
 
-        {/* 🖼️ LEFT IMAGE */}
         <div className="flex-1 flex justify-center">
           <img
             src={assets.lotto || "/lotto.png"}
@@ -38,7 +36,6 @@ const About = () => {
           />
         </div>
 
-        {/* 📄 RIGHT CONTENT */}
         <div className="flex-1">
           <h1 className="text-4xl font-bold text-[#d4af37] mb-6">
             ABOUT US
@@ -63,7 +60,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* ✨ OPTIONAL BACKGROUND DECOR */}
       <div className="absolute inset-0 pointer-events-none opacity-10 bg-[url('/pattern.png')] bg-cover" />
 
       <Footer />

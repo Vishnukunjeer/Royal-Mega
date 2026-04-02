@@ -51,8 +51,6 @@ const PrivacyPolicy: React.FC = () => {
         </p>
       </section>
 
-
-      {/* MAIN (CENTERED FIX APPLIED ✅) */}
       <div className="flex justify-center px-4 py-12">
         <div className="flex w-full max-w-6xl gap-10">
 
@@ -70,7 +68,6 @@ const PrivacyPolicy: React.FC = () => {
             </ul>
           </aside>
 
-          {/* CONTENT */}
           <main className="flex-1 max-w-3xl mx-auto">
             
             <section className="mb-10">
@@ -129,7 +126,6 @@ const PrivacyPolicy: React.FC = () => {
         </div>
       </div>
 
-      {/* FOOTER */}
       <Footer/>
     </div>
   );

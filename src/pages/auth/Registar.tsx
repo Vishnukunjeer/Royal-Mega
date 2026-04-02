@@ -43,11 +43,9 @@ const Register = () => {
   return (
     <div className="flex min-h-screen bg-black">
 
-      {/* LEFT PANEL */}
       <div className="w-full md:w-[40%] flex items-center justify-center px-6">
         <div className="w-full max-w-md text-white">
 
-          {/* Logo */}
           <img
             src={assets.logo1}
             className="h-12 mb-6"
@@ -63,7 +61,6 @@ const Register = () => {
 
           <div className="space-y-4">
 
-            {/* First + Last Name */}
             <div className="flex gap-3">
               <input
                 name="firstName"
@@ -79,7 +76,6 @@ const Register = () => {
               />
             </div>
 
-            {/* Username */}
             <input
               name="username"
               onChange={handleChange}
@@ -87,7 +83,6 @@ const Register = () => {
               className="w-full px-4 py-2.5 rounded-full bg-gray-200 text-black"
             />
 
-            {/* Email + OTP */}
             <div className="relative">
               <input
                 name="email"
@@ -100,7 +95,6 @@ const Register = () => {
               </button>
             </div>
 
-            {/* Password */}
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
@@ -118,7 +112,6 @@ const Register = () => {
               </button>
             </div>
 
-            {/* Checkbox */}
             <div className="text-xs text-gray-400 space-y-1">
               <label className="flex items-center gap-2">
                 <input
@@ -140,7 +133,6 @@ const Register = () => {
 
             </div>
 
-            {/* Button */}
             <button
               onClick={handleRegister}
               className="w-full py-2.5 rounded-full font-bold text-black bg-linear-to-r from-[#E3BA5D] via-[#FFDEAC] to-[#D4AC54] shadow-lg hover:scale-105 transition"
@@ -148,7 +140,6 @@ const Register = () => {
               Create account
             </button>
 
-            {/* Login */}
             <p className="text-center text-sm text-gray-400">
               Already have an account?{" "}
               <span onClick={() => navigate("/login")} 
@@ -161,7 +152,6 @@ const Register = () => {
         </div>
       </div>
 
-      {/* RIGHT PANEL */}
       <div className="hidden md:flex w-[60%] relative overflow-hidden">
 
         <img

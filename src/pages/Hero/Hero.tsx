@@ -10,10 +10,9 @@ const Hero: React.FC = () => {
   
 
   return (
-    // CHANGE: Removed max-h-1/5 (non-standard) aur layout ko tight karne ke liye padding set ki
+    
     <section className="relative w-full bg-black-100 text-white border-b-2 border-[#d4af37] overflow-hidden">
       
-      {/* ── Decorative corner ornaments ── */}
       <div
         className="absolute left-0 top-0 w-[40%] h-full opacity-80 pointer-events-none"
         style={{
@@ -106,7 +105,6 @@ const LoginCard: React.FC<LoginCardProps> = ({ showPassword, setShowPassword ,na
 
     <div className="space-y-4 text-gray-300 text-sm">
       
-      {/* Email */}
       <div className="space-y-1">
         <label className="block text-gray-400 text-[10px] uppercase tracking-widest">
           Email or mobile *
@@ -117,7 +115,6 @@ const LoginCard: React.FC<LoginCardProps> = ({ showPassword, setShowPassword ,na
         />
       </div>
 
-      {/* Password */}
       <div className="space-y-1">
         <div className="flex justify-between items-center">
           <label className="text-gray-400 text-[10px] uppercase tracking-widest">Password *</label>
@@ -139,7 +136,7 @@ const LoginCard: React.FC<LoginCardProps> = ({ showPassword, setShowPassword ,na
         </div>
       </div>
 
-      {/* Code */}
+
       <div className="space-y-1">
         <label className="block text-gray-400 text-[10px] uppercase tracking-widest">
           Code (optional)
@@ -150,12 +147,11 @@ const LoginCard: React.FC<LoginCardProps> = ({ showPassword, setShowPassword ,na
         />
       </div>
 
-      {/* Login Button */}
+ 
       <button className="w-full bg-linear-to-r from-[#E3BA5D]/80 via-[#FFDEAC] to-[#D4AC54] py-2.5 mt-2 rounded-full text-black font-bold text-sm tracking-wide shadow-[0_4px_20px_rgba(212,175,55,0.35)] hover:opacity-90 active:scale-[0.98] transition">
         Login
       </button>
 
-      {/* Register Link */}
       <p className="text-center text-xs text-gray-400 mt-3">
         Not registered yet?{" "}
         <span className="text-[#d4af37] cursor-pointer hover:underline font-medium" 

@@ -1,17 +1,12 @@
 import { useState } from 'react';
 import { assets } from '@/assets/assets';
 import { useNavigate } from "react-router-dom"
+import type { Draw } from '@/types/index';
 
 
 type Screen = 'list' | 'details';
 
-interface Draw {
-  id: string;
-  name: string;
-  prize: string;
-  date: string;
-  image:string;
-}
+
 
 const getCurrentDate = () => {
   return new Date().toLocaleDateString('en-IN', {

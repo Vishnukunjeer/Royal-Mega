@@ -52,10 +52,9 @@ const TermsPage: React.FC = () => {
         </p>
       </section>
 
-      {/* MAIN */}
       <div className="flex justify-center px-4 py-12">
   <div className="flex w-full max-w-6xl gap-10">
-        {/* SIDEBAR */}
+
         <aside className="w-64 hidden md:block">
           <ul className="space-y-3 text-sm text-gray-400">
             {menuItems.map((item, index) => (
@@ -69,7 +68,7 @@ const TermsPage: React.FC = () => {
           </ul>
         </aside>
 
-        {/* CONTENT */}
+
         <main className="flex-1 max-w-3xl">
           <section className="mb-10">
             <h2 className=" text-lg font-semibold mb-3">
@@ -133,7 +132,6 @@ const TermsPage: React.FC = () => {
       </div>
       </div>
 
-      {/* FOOTER */}
       <Footer/>
     </div>
   );

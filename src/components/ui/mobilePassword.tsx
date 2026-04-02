@@ -69,9 +69,6 @@ export const MobilePassword = () => {
         <h1 className="font-semibold text-xl">Change Password</h1>
       </div>
                 <div className="grid md:grid-cols-2 gap-6">
-
-
-
                   {/* Current Password */}
                   <div className="relative">
                     <label className="text-lg text-gray-400 font-bold">Current Password</label>
@@ -81,12 +78,7 @@ export const MobilePassword = () => {
                       placeholder="********"
                       className="w-full mt-1 p-3 bg-white rounded text-gray-700"
                     />
-
-
                   </div>
-
-                  {/* EMPTY (to keep layout same as design) */}
-             
 
                   {/* New Password */}
                   <div className="relative">
