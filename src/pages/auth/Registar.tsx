@@ -1,7 +1,17 @@
 import { useState } from "react"
-import { Eye, EyeOff } from "lucide-react"
+import { ArrowRightCircle, Eye, EyeOff } from "lucide-react"
 import { assets } from "@/assets/assets"
 import {useNavigate } from "react-router-dom"
+
+type ErrorType = {
+  firstName?: string
+  lastName?: string
+  userName?: string
+  email?: any
+  password?: string
+  agree?: string
+  ageConfirm?: string
+}
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -9,39 +19,75 @@ const Register = () => {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
-    username: "",
+    userName: "",
     email: "",
     password: "",
     agree: false,
+    ageConfirm:false,
   })
   const navigate = useNavigate()
+  const [error,setError] = useState<ErrorType>({})
 
   const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target
-    setForm({
-      ...form,
+    setForm((prev) => ({
+    ...prev,
       [name]: type === "checkbox" ? checked : value,
-    })
+    }))
   }
+  const validateEmail = (value: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const phoneRegex = /^[1-9]\d{9}$/  // Indian mobile number
+
+  return emailRegex.test(value) || phoneRegex.test(value)
+}
 
   const handleRegister = () => {
-    if (!form.firstName || !form.email || !form.password) {
-      alert("Please fill required fields")
-      return
-    }
+    setError({})
+  const newErrors: ErrorType = {}
 
-    if (!form.agree) {
-      alert("Please accept terms")
-      return
-    }
-
-    console.log("Register Data:", form)
-
-    // 👉 API call yaha lagao
+  if (!form.firstName) {
+    newErrors.firstName = "First name is required"
   }
+
+  if (!form.lastName) {
+    newErrors.lastName = "Last name is required"
+  }
+
+  if(!form.userName){
+    newErrors.userName = "User name is required"
+  }
+
+  if (!form.email) {
+    newErrors.email = "Email is required or mobile"
+  } else if (!validateEmail(form.email)) {
+    newErrors.email = "Enter valid email or mobile"
+  }
+
+  if (!form.password) {
+    newErrors.password = "Password is required"
+  } 
+
+  if (!form.agree) {
+    newErrors.agree = "Accept terms"
+  }
+
+  if(!form.ageConfirm){
+    newErrors.ageConfirm = "must be 18+"
+  }
+
+  if (Object.keys(newErrors).length > 0) {
+    setError(newErrors)
+    return
+  }
+
+  console.log("Register Data:", form)
+}
 
   return (
     <div className="flex min-h-screen bg-black">
+
+     
 
       <div className="w-full md:w-[40%] flex items-center justify-center px-6">
         <div className="w-full max-w-md text-white">
@@ -60,55 +106,86 @@ const Register = () => {
           </p>
 
           <div className="space-y-4">
+           <div className="flex gap-3">
+  <div className="w-1/2">
+    <p className=" mb-1">First name*</p>
+    <input
+      name="firstName"
+      value={form.firstName}
+      onChange={handleChange}
+      className="w-full px-4 py-2.5 rounded-full bg-gray-200 text-black"
+      placeholder="First name"
+    />
+    {error.firstName && (
+      <p className="text-red-500 text-xs mt-1">{error.firstName}</p>
+    )} 
+  </div>
 
-            <div className="flex gap-3">
-              <input
-                name="firstName"
-                onChange={handleChange}
-                placeholder="First name"
-                className="w-1/2 px-4 py-2.5 rounded-full bg-gray-200 text-black"
-              />
-              <input
-                name="lastName"
-                onChange={handleChange}
-                placeholder="Last name"
-                className="w-1/2 px-4 py-2.5 rounded-full bg-gray-200 text-black"
-              />
-            </div>
-
+  <div className="w-1/2">
+    <p className=" mb-1">Last name*</p>
+    <input
+      name="lastName"
+      value={form.lastName}
+      onChange={handleChange}
+      className="w-full px-4 py-2.5 rounded-full bg-gray-200 text-black"
+      placeholder="Last name"
+    />
+     {error.lastName && (
+      <p className="text-red-500 text-xs mt-1">{error.lastName}</p>
+    )} 
+  </div>
+</div>
+            <div>
+              <p>Username*</p>
             <input
-              name="username"
+              name="userName"
+              value={form.userName}
               onChange={handleChange}
               placeholder="Enter your username"
               className="w-full px-4 py-2.5 rounded-full bg-gray-200 text-black"
             />
+            {error.userName && (
+      <p className="text-red-500 text-xs">{error.userName}</p>
+    )} 
+    </div>
 
             <div className="relative">
+              <p>Email or mobile*</p>
               <input
                 name="email"
+                value={form.email}
                 onChange={handleChange}
                 placeholder="Enter your email or mobile"
                 className="w-full px-4 py-2.5 rounded-full bg-gray-200 text-black pr-16"
               />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 text-xs bg-gray-300 px-3 py-1 rounded-full text-black">
-                OTP
+              {error.email && (
+      <p className="text-red-500 text-xs mt-1">{error.email}</p>
+    )} 
+              <button className="absolute flex flex-row font-bold right-0 top-11.5 -translate-y-1/2 text-xs bg-gray-300 px-3 py-3.5 rounded-full text-black">
+                OTP <ArrowRightCircle className="ml-1" size={15}/>
               </button>
             </div>
 
             <div className="relative">
+              <p>Password*</p>
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
+                value={form.password}
                 onChange={handleChange}
                 placeholder="Enter your password"
                 className="w-full px-4 py-2.5 rounded-full bg-gray-200 text-black pr-12"
               />
+              {error.password && (
+      <p className="text-red-500 text-xs mt-1">{error.password}</p>
+    )} 
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600"
               >
-                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+
+                {showPassword ? <EyeOff size={16} className="mt-5" /> : <Eye size={16} className="mt-5" />}
               </button>
             </div>
 
@@ -116,20 +193,29 @@ const Register = () => {
               <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
+                  checked={form.agree}
                   name="agree"
                   onChange={handleChange}
                 />
+              
                 I accept Terms of Use & Privacy Policy
               </label>
+                {error.agree && (
+  <p className="text-red-500 text-xs">{error.agree}</p>
+)}
 
               <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
-                  name="agree"
+                  checked={form.ageConfirm}
+                  name="ageConfirm"
                   onChange={handleChange}
                 />
                 I am 18 year old 
               </label>
+              {error.ageConfirm && (
+  <p className="text-red-500 text-xs">{error.ageConfirm}</p>
+)}
 
             </div>
 
@@ -171,7 +257,16 @@ const Register = () => {
           <p className="bg-black/70 backdrop-blur-md px-4 py-3 rounded-lg text-sm text-gray-300">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           </p>
+          
         </div>
+         <div
+              className="absolute left-30 top-50 w-[50%] h-full  opacity-80 pointer-events-none"
+              style={{
+                backgroundImage: `url(${assets.register})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "contain",
+              }}
+            />
       </div>
     </div>
   )

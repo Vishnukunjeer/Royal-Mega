@@ -17,7 +17,7 @@ import MegaJackpot from "./MegaJackpot.png"
 import mask from "./Mask.png"
 import card1 from "./cards.png"
 import Login from "./golden-particle-dust-background-wallpaper 2.png"
-import coin from "./7e0d2fd1186c9241376e6511a469a1ff980e8ebc.png"
+
 import lotto from "./Section → about-left.png.png"
 import side_ball from "./10287368 1.png"
 import roullete from "./thumb2 1.png"
@@ -26,9 +26,12 @@ import bg_dot from "./wp-shape-2.png.png"
 import bg_cards from "./1164976520.png"
 import mobileLotto from "./lottery-header-right.png"
 import WalletWallpaper from "./human-hand-with-casino-chips-green-table 1.png"
+import register from "./register.png"
+
 
 export const assets = {
     logo,
+    register,
     WalletWallpaper,
     mobileLotto,
     bg_cards,
@@ -38,7 +41,6 @@ export const assets = {
     side_ball,
     lotto,
     Login,
-    coin,
     card1,
     logo1,
     mask,

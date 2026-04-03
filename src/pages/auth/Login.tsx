@@ -1,38 +1,58 @@
-import { useState } from "react"
+import { useState,} from "react"
 import { Eye, EyeOff } from "lucide-react"
 import { assets } from "@/assets/assets"
 import { useNavigate } from "react-router-dom"
 import { DUMMY_ADMIN, DUMMY_USER } from "@/data/dummyUser"
 
+type ErrorType = {
+  email?: string
+  password?: string
+}
+
+
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [error,setError] = useState<ErrorType>({})
 
   const navigate = useNavigate();
   
-const handleLogin = () => {
-  if (!email || !password) {
-    alert("Please fill all required fields")
+const handleLogin = (e:React.MouseEvent<HTMLButtonElement>) => {
+  e.preventDefault()
+
+  const newErrors:ErrorType = {}
+
+  if (!email) {
+    newErrors.email = "Email is required"
+  } else if (!validateEmail(email)) {
+    newErrors.email = "Enter a valid email"
+  }
+
+  if (!password) {
+    newErrors.password = "Password is required"
+  }
+
+  if (Object.keys(newErrors).length > 0) {
+    setError(newErrors)
     return
   }
 
   if (
-    email === DUMMY_USER.email &&
-    password === DUMMY_USER.password,
-
-    email === DUMMY_ADMIN.email &&
-    password === DUMMY_ADMIN.password
+    (email === DUMMY_USER.email && password === DUMMY_USER.password) ||
+    (email === DUMMY_ADMIN.email && password === DUMMY_ADMIN.password)
   ) {
-
     localStorage.setItem("isAuth", "true")
     localStorage.setItem("user", JSON.stringify(DUMMY_USER))
-
-
     navigate("/dashboard")
   } else {
     alert("Invalid email or password")
   }
+}
+
+const validateEmail = (email:string):boolean => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
   return (
@@ -54,11 +74,15 @@ const handleLogin = () => {
                 Email or mobile *
               </label>
               <input
+                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full mt-2 px-4 py-3 rounded-full bg-gray-200 text-black"
-                placeholder="Enter your email or mobile"
+                placeholder="Enter your email"
               />
+              {error.email && (
+                <p className="text-red-500 text-xs mt-1">{error.email}</p>
+              )}
             </div>
 
             <div>
@@ -71,12 +95,16 @@ const handleLogin = () => {
 
               <div className="relative mt-2">
                 <input
+                 required
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-3 rounded-full bg-gray-200 text-black pr-12"
                   placeholder="Enter your password"
                 />
+                {error.password && (
+  <p className="text-red-500 text-xs mt-1">{error.password}</p>
+)}
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
