@@ -292,14 +292,12 @@ export default function CartPage() {
       {selectedTicket && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
 
-          <div className="bg-white text-black rounded-xl w-full max-w-md shadow-2xl flex flex-col">
+          <div className="bg-white text-black rounded-xl w-full max-w-md shadow-2xl flex flex-col h-100 p-5">
+            
 
-            <div className="flex items-center justify-between p-5 border-b border-gray-200">
-              <h3 className="text-lg font-bold">{selectedTicket.drawName}</h3>
-              <button onClick={() => setSelectedTicket(null)}>
-                <X size={20} />
-              </button>
-            </div>
+              <h3 className="text-lg font-bold text-center">{selectedTicket.drawName}</h3>
+              
+            <div className='border-b border-[#D4AC54]'></div>
 
             <div className="p-4 max-h-64 overflow-y-auto space-y-3">
 
@@ -328,16 +326,17 @@ export default function CartPage() {
               ))}
 
             </div>
-            <div className="pb-[-{5}] border-t border-gray-200 flex justify-center">
+
+
+          </div>
+                      
               <button
                 onClick={() => setSelectedTicket(null)}
-                className="bg-linear-to-r from-[#d4af37] to-[#b8962e] text-black px-10 py-3 rounded-full font-semibold"
+                className="bg-[#D4AC54] text-black px-18 py-3 rounded-full absolute mt-100"
               >
                 OK
               </button>
-            </div>
-
-          </div>
+            
         </div>
       )}
 

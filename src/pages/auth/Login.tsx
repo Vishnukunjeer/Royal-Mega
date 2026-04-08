@@ -1,9 +1,8 @@
 import { useState,} from "react"
 import { Eye, EyeOff } from "lucide-react"
 import { assets } from "@/assets/assets"
-import { useNavigate } from "react-router-dom"
+import { useNavigate ,Link} from "react-router-dom"
 import { DUMMY_ADMIN, DUMMY_USER } from "@/data/dummyUser"
-
 type ErrorType = {
   email?: string
   password?: string
@@ -60,12 +59,14 @@ const validateEmail = (email:string):boolean => {
 
       <div className="w-full md:w-[40%] flex items-center justify-center px-6">
         <div className="w-full max-w-md">
-          
+          <Link to = "/">
           <img
             src={assets.logo1}
             className="h-14 mx-auto mb-10 drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]"
             alt="Royal Mega"
+            
           />
+          </Link>
 
           <div className="space-y-5 text-white">
 

@@ -3,7 +3,7 @@ import { assets } from "@/assets/assets";
 import { useState } from "react";
 import MobileFooter from "@/layouts/Mobile";
 import { useNavigate } from "react-router-dom";
-import { Landmark } from "lucide-react";
+import { Landmark,CirclePlus } from "lucide-react";
 
 
 export const MobileProfile = () => {
@@ -19,6 +19,7 @@ export const MobileProfile = () => {
     email: storedUser?.email || "user@gmail.com",
   }
   const navigate = useNavigate()
+  const [activeBtn, setActiveBtn] = useState<"transactions" | "payments">("transactions");
   function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex justify-between text-sm">
@@ -49,7 +50,32 @@ const historyData = [
   },
 ];
 
-    
+const transactions = [
+  { type: "Credit", status: "Confirmed", narration: "Deposit" },
+  { type: "Withdraw", status: "Pending", narration: "Deposit" },
+  { type: "Withdraw", status: "Confirmed", narration: "Deposit" },
+  { type: "Credit", status: "Confirmed", narration: "Deposit" },
+  { type: "Credit", status: "Failed", narration: "Deposit" },
+  { type: "Credit", status: "Confirmed", narration: "Deposit" },
+];
+
+const getTypeColor = (type:string) => {
+  return type === "Credit" ? "text-green-500" : "text-red-400";
+};
+
+const getStatusColor = (status:string) => {
+  switch (status) {
+    case "Confirmed":
+      return "text-black";
+    case "Pending":
+      return "text-gray-500";
+    case "Failed":
+      return "text-red-500";
+    default:
+      return "text-black";
+  }
+
+}
   return (
     <>
     <nav className="bg-black border-b border-[#D4AC54] lg:hidden sticky top-0 z-50">
@@ -205,8 +231,8 @@ const historyData = [
             )}
             {activeTab === "Wallet" && (
                 
-                <>
-                <div className="flex items-center gap-3 bg-[#D4AC54] text-black px-4 py-3 rounded pb-5">
+                <div className="min-h-200">
+                <div className="flex items-center gap-3 bg-[#D4AC54] text-black px-4 py-3 rounded pb-5 overflow-y-auto">
         <button onClick={() => navigate(-1)}>←</button>
         <h1 className="font-semibold">Wallet</h1>
       </div>
@@ -217,22 +243,71 @@ const historyData = [
 
               <div className="relative">
 
-                <p className="text-black font-semibold">Current Balance</p>
-                <p> ₹5,22,850</p>
-                <div className="flex justify-between pl-3 pr-3">
-                <button className="border border-black  bg-white rounded-2xl px-5 py-1 my-1 font-semibold">Withdraw Balance</button>
-                <button className="flex border border-white bg-[#D4AC54] px-5 py-2  m-1 rounded-2xl font-semibold gap-1"><button className="rounded-full border border-black size-5 pb-0.5 ">+</button>Add Balance</button>
+                <p className="text-black font-semibold px-10 mb-2 text-xl">Current Balance</p>
+                <span className=" text-[#D4AC54] font-black px-10 text-2xl text-shadow-black"> ₹5,22,850</span>
+                <div className="flex justify-between pl-3 pr-3 pt-3">
+                <button className="border border-black  bg-white rounded-2xl mx-3.5 px-0.5 py-1 my-1 gap-0.5">Withdraw Balance</button>
+                <button className="flex border border-white bg-[#D4AC54] px-3 py-2 mx-1  m-1 rounded-2xl mr-2"><CirclePlus size={14} className="mt-1.5"/>
+                  Add Balance
+                  </button>
               </div>
-              <div className="border-2 border-[#D4AC54]">
-                <button className="bg-[#D4AC54]">Transaction</button>
-              <button>
-    
-                Payments</button>
-              </div>
-              </div>
+             <div className="border-2 border-[#D4AC54] mt-10 mr-15 ml-3  flex rounded-lg">
+  <button
+    onClick={() => setActiveBtn("transactions")}
+    className={`w-1/2 py-2 text-sm font-medium transition-all ${
+      activeBtn === "transactions"
+        ? "bg-[#D4AC54] text-black rounded-xl m-1"
+        : "text-white m-1"
+    }`}
+  >
+    Transactions
+  </button>
 
+  <button
+    onClick={() => setActiveBtn("payments")}
+    className={`w-1/2 py-2 text-sm font-medium ${
+      activeBtn === "payments"
+        ? "bg-[#D4AC54] text-black rounded-xl m-1"
+        : "text-white m-1"
+    }`}
+  >
+    Payments
+  </button>
+</div>
+              
+  <div className="bg-white rounded-2xl mt-4 shadow-sm overflow-hidden mx-3">
+
+  {/* Header */}
+  <div className="grid grid-cols-3 bg-blue-100 text-gray-700 font-semibold text-sm px-2 py-3">
+    <div className="text-center">Type</div>
+    <div className="text-center">Status</div>
+    <div className="text-center">Narration</div>
+  </div>
+
+  {/* Rows */}
+  {transactions.map((tx, index) => (
+    <div
+      key={index}
+      className={`grid grid-cols-3 px-2 py-3 text-sm text-center ${
+        index === 0 ? "bg-green-100" : "bg-white"
+      } border-b last:border-b-0`}
+    >
+      <div className={`${getTypeColor(tx.type)} font-medium`}>
+        {tx.type}
+      </div>
+
+      <div className={`${getStatusColor(tx.status)}`}>
+        {tx.status}
+      </div>
+
+      <div>{tx.narration}</div>
+    </div>
+  ))}
+
+</div>
+</div>
             
-              </>
+              </div>
                 
             )}
             {activeTab === "Bet History" && (

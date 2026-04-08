@@ -1,6 +1,7 @@
 import Footer from "@/layouts/Footer"
 import Header from "@/layouts/Header"
 import { assets } from "@/assets/assets"
+import MobileFooter from "@/layouts/Mobile"
 
 const About = () => {
   return (
@@ -63,6 +64,9 @@ const About = () => {
       <div className="absolute inset-0 pointer-events-none opacity-10 bg-[url('/pattern.png')] bg-cover" />
 
       <Footer />
+      <div className="lg:hidden">
+      <MobileFooter/>
+      </div>
     </div>
   )
 }

@@ -75,7 +75,7 @@ export default function MobileCheckout() {
       </div>
 
       {/* Summary */}
-      <div className="mt-6 border-gray-600  text-sm pt-30">
+      <div className="mt-35 border-gray-600  text-sm pt-30">
         <div className="flex justify-between text-gray-400 mb-2 pt-2 border-t">
           <span>ITEM</span>
           <span>Qty</span>

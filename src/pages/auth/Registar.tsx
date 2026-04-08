@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { ArrowRightCircle, Eye, EyeOff } from "lucide-react"
 import { assets } from "@/assets/assets"
-import {useNavigate } from "react-router-dom"
+import {useNavigate ,Link} from "react-router-dom"
 
 type ErrorType = {
   firstName?: string
@@ -37,7 +37,7 @@ const Register = () => {
   }
   const validateEmail = (value: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  const phoneRegex = /^[1-9]\d{9}$/  // Indian mobile number
+  const phoneRegex = /^[1-9]\d{9}$/
 
   return emailRegex.test(value) || phoneRegex.test(value)
 }
@@ -91,12 +91,13 @@ const Register = () => {
 
       <div className="w-full md:w-[40%] flex items-center justify-center px-6">
         <div className="w-full max-w-md text-white">
-
+          <Link to='/'>
           <img
             src={assets.logo1}
             className="h-12 mb-6"
             alt="Royal Mega"
           />
+          </Link>
 
           <h2 className="text-xl font-semibold mb-1">
             Create an account

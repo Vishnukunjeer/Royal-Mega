@@ -34,20 +34,9 @@ export default function LottoSection() {
   const TICKET_PRICE = 40.00;
 
   const availableDraws = [
-    {
-      id: "New lotto 1",
-      name: "Mega Jackpot",
-      prize: "₹5,00,00,000",
-      date: "Tuesday, July 9, 2024",
-      image: assets.MegaJackpot
-    },
-    {
-      id: "New lotto 2",
-      name: "Super Jackpot",
-      prize: "₹2,50,00,000",
-      date: "Wednesday, July 10, 2024",
-      image: assets.MegaJackpot
-    }
+    { id: "New lotto 1", name: "Mega Jackpot", prize: "₹5,00,00,000", date: "Tuesday, July 9, 2024", image: assets.MegaJackpot },
+    { id: "New lotto 2", name: "Super Jackpot", prize: "₹2,50,00,000", date: "Wednesday, July 10, 2024", image: assets.MegaJackpot },
+    { id: "New lotto 3", name: "Royal Jackpot", prize: "₹1,00,00,000", date: "Thursday, July 11, 2024", image: assets.MegaJackpot }
   ];
 
   const toggleMainBall = (num: number) => {
@@ -99,7 +88,6 @@ export default function LottoSection() {
     setActiveDrawIndex((prev) => (prev === availableDraws.length - 1 ? 0 : prev + 1));
   };
 
-  const currentDraw = availableDraws[activeDrawIndex];
 
   return (
     <>
@@ -124,77 +112,68 @@ export default function LottoSection() {
           </h1>
 
 
-          <div className="w-full max-w-300 bg-linear-to-r from-[#D0A549] via-[#8c6721] to-black p-4 md:p-6 mb-8 flex flex-col xl:flex-row items-center justify-between gap-5 relative shadow-2xl z-10 overflow-hidden rounded-2xl">
-
-
-            <button onClick={handlePrevDraw} aria-label='prev' className="hidden xl:flex p-2 border-2 border-black rounded-full hover:bg-black/10 transition shrink-0 text-black z-10">
-              <ChevronLeft size={20} strokeWidth={2.5}
-
-              />
+          <div className="w-full max-w-300 bg-linear-to-r from-[#D0A549] via-[#8c6721] to-black p-4 md:p-6 mb-8 flex items-center relative shadow-2xl z-10 overflow-hidden rounded-2xl">
+            
+            {/* Left Button */}
+            <button onClick={handlePrevDraw} className="absolute left-4 z-20 p-2 border-2 border-black rounded-full hover:bg-black/10 transition text-black bg-white/20">
+              <ChevronLeft size={24} strokeWidth={3} />
             </button>
 
+            {/* Viewport for Slider */}
+            <div className="overflow-hidden w-full ml-10">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${activeDrawIndex * 100}%)` }}
+              >
+                {availableDraws.map((draw) => (
+                  <div key={draw.id} className="min-w-full flex justify-center px-4">
+                    <div className="w-full max-w-2xl bg-linear-to-r from-[#e1bb58] via-[#d1a646] to-[#b98d35] rounded-xl p-5 flex items-center justify-between border border-white/20 relative shadow-lg text-black">
+                      <div className="flex items-center gap-4 flex-1">
+                        <img src={draw.image} alt="jackpot" className="w-20 h-20 object-contain drop-shadow-xl" />
+                        <div>
+                          <h2 className="text-2xl font-black leading-tight">{draw.name}</h2>
+                          <p className="font-semibold">Mega Prize: <span className="text-xl text-white drop-shadow-[0_1px_1px_rgba(0,0,0,1)]">{draw.prize}</span></p>
+                          <p className="text-sm font-bold opacity-80 text-black">Ticket Price:<span className='text-white drop-shadow-[0_1px_1px_rgba(0,0,0,1)]'> ₹{TICKET_PRICE}</span></p>
+                          <div className="flex items-center text-[11px] mt-1 font-bold">
+                            <Calendar size={12} className="mr-1" /> {draw.date}
+                          </div>
+                        </div>
+                      </div>
 
-            <div className="w-full xl:max-w-[48%] bg-linear-to-r from-[#e1bb58] via-[#d1a646] to-[#b98d35] rounded-xl p-4 md:p-5 flex flex-col md:flex-row items-center justify-between border border-white/20 relative z-10 shadow-lg">
-              <div className="flex flex-col md:flex-row items-center gap-4 w-full">
-                <div className="shrink-0 mb-2 md:mb-0">
-                  <img src={currentDraw.image} alt="jackpot-ball" className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-xl" />
-                </div>
-
-                <div className="flex-1 text-black text-center md:text-left">
-                  <h2 className="text-xl md:text-2xl font-black mb-1 text-gray-900 leading-tight">{currentDraw.name}</h2>
-                  <div className="flex flex-col sm:flex-row items-center md:justify-start gap-1 sm:gap-2 mb-1">
-                    <span className="text-[13px] font-semibold text-gray-800">Mega Prize:</span>
-                    <span className="text-lg md:text-xl font-black text-white" style={{ WebkitTextStroke: '1px black' }}>
-                      {currentDraw.prize}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-                    <span className="text-[13px] font-semibold text-gray-800">Ticket Price:</span>
-                    <span className="text-[15px] font-black text-white" style={{ WebkitTextStroke: '0.5px black' }}>
-                      ₹{TICKET_PRICE}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-center md:justify-start text-[11px] font-semibold text-gray-900">
-                    <Calendar size={12} className="mr-1.5" /> {currentDraw.date}
-                  </div>
-                </div>
-
-
-                <div className="flex flex-col items-center justify-center shrink-0 mt-4 md:mt-0 md:mr-2">
-                  <span className="text-[9px] font-bold text-gray-800 mb-1 tracking-widest uppercase">Timer</span>
-                  <div className="flex gap-1.5 text-center">
-                    <div className="flex flex-col items-center">
-                      <span className="text-[8px] text-gray-800 mb-0.5">Hours</span>
-                      <div className="bg-white px-2 py-0.5 rounded text-black font-mono font-bold text-sm">{hours}</div>
+                      {/* Timer */}
+                      <div className="flex flex-col items-center border-l border-black/10 pl-4">
+                        <span className="text-[15px] uppercase tracking-widest pb-6">Timer</span>
+                        <div className='flex gap-3'>
+                        <p className='text-[9px]'>hours</p>
+                          <p className='text-[9px]'>minutes</p>
+                          <p className='text-[9px]'>seconds</p>
+                          </div>
+                        <div className="flex flex-row">
+                          
+                          <div className='flex gap-2'>
+                          {[hours, minutes, seconds].map((unit, i) => (
+                            <div key={i} className="bg-white px-2 py-1 rounded text-black font-mono font-bold text-sm shadow-sm">{unit}</div>
+                          ))}
+                          </div>
+                        </div>
+                        
+                      </div>
                     </div>
-                    <div className="flex flex-col items-center">
-                      <span className="text-[8px] text-gray-800 mb-0.5">Minutes</span>
-                      <div className="bg-white px-2 py-0.5 rounded text-black font-mono font-bold text-sm">{minutes}</div>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <span className="text-[8px] text-gray-800 mb-0.5">Seconds</span>
-                      <div className="bg-white px-2 py-0.5 rounded text-black font-mono font-bold text-sm">{seconds}</div>
-                    </div>
+                    
                   </div>
-                </div>
+                ))}
               </div>
-              <div className="absolute bottom-0 right-0 h-1.5 w-16 bg-[#ff4d4d] rounded-br-xl rounded-tl-lg shadow-inner"></div>
             </div>
-
-
-            <div className="hidden xl:flex items-center shrink-0 z-10 pl-2">
-              <span className="text-[8px] text-white/60 tracking-[0.25em] font-medium" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
-                SLIDE FOR MORE DRAWS
-              </span>
-            </div>
-
-            <button onClick={handleNextDraw} className="hidden xl:flex p-1.5 border-[1.5px] border-white rounded-full hover:bg-white/10 transition shrink-0 text-white z-10 mr-4" aria-label='Next-draw'>
-              <ChevronRight size={18} strokeWidth={2.5}
-              />
+          
+        <div className="hidden xl:flex items-center shrink-0 z-10 pr-15">
+          <span className="text-[8px] text-white/60 tracking-[0.25em] font-medium" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+            SLIDE FOR MORE DRAWS
+          </span>
+          <button onClick={handleNextDraw} className=" z-20 p-2 ml-2 border-2 border-white rounded-full hover:bg-white/10 transition text-white bg-black/20">
+              <ChevronRight size={24} strokeWidth={3} />
             </button>
-
-
-            <div className="flex items-center gap-3 shrink-0 z-10 mt-4 xl:mt-0 ml-auto">
+        </div>
+                      <div className="flex items-center gap-3 shrink-0 z-10 mt-4 xl:mt-0 ml-auto">
 
               <button className="bg-linear-to-r from-[#e3ba5c] to-[#c99c3a] text-black font-medium text-[13px] tracking-[0.02em] px-7 py-2.5 mb-8 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.2)] hover:brightness-110 transition whitespace-nowrap leading-none flex items-center justify-center">
                 Pick Any 6 Number
@@ -270,30 +249,48 @@ export default function LottoSection() {
             <div className="px-4 md:px-8 pb-4">
               <div className="border border-gray-200 rounded-lg p-4 md:p-5 flex flex-col xl:flex-row items-center justify-between bg-white">
 
-                <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-8 w-full xl:w-auto mb-4 xl:mb-0">
-                  <span className="text-[#2b3a55] font-semibold text-sm md:text-base">Selected numbers:</span>
-                  <div className="flex flex-wrap justify-center gap-2">
-                    {Array.from({ length: MAX_MAIN_BALLS }).map((_, i) => (
-                      <div
-                        key={`sel-main-${i}`}
-                        className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-xs md:text-sm shadow-sm
-                      ${selectedMain[i] ? 'bg-[#dfb850] text-black font-bold' : 'bg-transparent border border-gray-200 text-transparent'}
-                    `}
-                      >
-                        {selectedMain[i] ? formatNumber(selectedMain[i]) : ''}
-                      </div>
-                    ))}
+               
 
-                    <div
-                      className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-xs md:text-sm shadow-sm ml-1 md:ml-2
-                    ${selectedMega ? 'bg-red-500 text-white font-bold' : 'bg-transparent border border-gray-200 text-transparent'}
-                  `}
+          {/* ✅ Selected Numbers Bar */}
+          <div className="px-8 pb-4">
+            <div className=" rounded-xl p-5 flex items-center justify-between bg-white">
+
+              {/* Selected balls — clickable to remove */}
+              <div className="flex items-center gap-50">
+                <span className="text-[#2b3a55] font-semibold text-sm whitespace-nowrap">Selected numbers:</span>
+                <div className="flex items-center gap-2">
+                  {/* Main balls — 5 slots */}
+                  {Array.from({ length: MAX_MAIN_BALLS }).map((_, i) => (
+                    <button
+                      key={`sel-main-${i}`}
+                      onClick={() => selectedMain[i] && toggleMainBall(selectedMain[i])}
+                      title={selectedMain[i] ? `Remove ${selectedMain[i]}` : ''}
+                      className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all
+                        ${selectedMain[i]
+                          ? 'bg-[#dfb850] text-white shadow-md hover:scale-110 hover:brightness-90 cursor-pointer'
+                          : 'bg-transparent border border-gray-200 cursor-default'
+                        }`}
                     >
-                      {selectedMega ? formatNumber(selectedMega) : ''}
-                    </div>
-                  </div>
-                </div>
+                      {selectedMain[i] ? formatNumber(selectedMain[i]) : ''}
+                    </button>
+                  ))}
 
+                  {/* Mega ball slot */}
+                  <button
+                    onClick={() => selectedMega && toggleMegaBall(selectedMega)}
+                    title={selectedMega ? `Remove ${selectedMega}` : ''}
+                    className={`w-10 h-10  rounded-full flex items-center justify-center text-sm font-bold transition-all ml-1
+                      ${selectedMega
+                        ? 'bg-red-500 text-white shadow-md hover:scale-110 hover:brightness-90 cursor-pointer'
+                        : 'bg-transparent border border-gray-200 cursor-default'
+                      }`}
+                  >
+                    {selectedMega ? formatNumber(selectedMega) : ''}
+                  </button>
+                </div>
+              </div>
+              </div>
+              </div>
 
                 <div className="flex gap-3 w-full sm:w-auto justify-center">
                   <button onClick={clearSelection} className="flex items-center gap-1.5 border border-gray-300 text-gray-500 text-xs md:text-sm font-medium px-4 md:px-5 py-2 rounded-full hover:bg-gray-50 transition">

@@ -1,6 +1,7 @@
 import Footer from "@/layouts/Footer"
 import Header from "@/layouts/Header"
 import { assets } from "@/assets/assets"
+import MobileFooter from "@/layouts/Mobile"
 
 const Contact = () => {
   return (
@@ -103,6 +104,9 @@ const Contact = () => {
       </div>
 
       <Footer />
+      <div className="lg:hidden">
+      <MobileFooter/>
+      </div>
     </div>
   )
 }

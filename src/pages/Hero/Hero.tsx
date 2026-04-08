@@ -1,17 +1,29 @@
-import React, { useState } from "react";
-import { CirclePlay, Eye, EyeOff } from "lucide-react";
+import { CirclePlay} from "lucide-react";
 import { assets } from "@/assets/assets";
-import { useNavigate } from "react-router-dom";
-import type {LoginCardProps} from "@/types/index";
+import  LoginCard  from "../auth/LoginCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import {Autoplay} from "swiper/modules"
+import "swiper/css";
+import { useRef } from "react";
+
 
 const Hero: React.FC = () => {
-  const navigate = useNavigate()
-  const [showPassword, setShowPassword] = useState(false);
-  
 
+const swiperRef = useRef<any>(null);
+
+const numbers = [1, 2, 3, 4, 5];
   return (
-    
-    <section className="relative w-full bg-black-100 text-white border-b-2 border-[#d4af37] overflow-hidden">
+    <Swiper
+    modules={[Autoplay]}
+  autoplay={{
+    delay: 10000, // 3 seconds
+    disableOnInteraction: false,
+  }}
+  loop={true}
+  className="h-52 sm:h-40 lg:h-120"
+>
+    <SwiperSlide>
+    <section className="relative w-full h-full bg-black-100 text-white border-b-2 border-[#d4af37] overflow-hidden ">
       
       <div
         className="absolute left-0 top-0 w-[40%] h-full opacity-80 pointer-events-none"
@@ -31,21 +43,13 @@ const Hero: React.FC = () => {
         }}
       />
 
-      <div className="flex
-  flex-row
-  items-center 
-  justify-between
- px-4 sm:px-6 lg:px-10 
-  py-6
-  
-">
+      <div className="flex flex-row items-center justify-between px-4 sm:px-4 lg:px-10 py-6">
         
-        {/* LEFT — Text */}
-        <div className="w-[57%] sm:w-[45%] lg:w-[30%] space-y-2">
-          <h1 className="text-[#f8dc65] text-lg lg:text-3xl sm:text-xl font-bold ">
+        <div className="w-[57%] sm:w-[45%] lg:w-[30%] ">
+          <h1 className="text-[#f8dc65] text-lg lg:text-3xl sm:text-xs font-bold ">
             Royal Lotto
           </h1>
-          <p className="text-gray-300 text-[8px] sm:text-xs lg:text-sm leading-snug">
+          <p className="text-gray-300 text-[8px] sm:text-xs lg:text-xs leading-snug">
             Join the excitement with Royal Mega's Lottery games, offering you the chance to turn dreams into reality with every ticket. Whether you're playing for fun or aiming for a life-changing win, our easy-to-play lotteries bring you closer to incredible prizes.
           </p>
         </div>
@@ -67,7 +71,6 @@ const Hero: React.FC = () => {
           </button>
         </div>
 
-        {/* CHANGE: max-w badha diya aur scale-110 xl:scale-125 add kiya taki image layout chota hone ke bawajood badi dikhe */}
         <div className="w-[45%] h-full flex justify-end items-center">
           <img
             src={assets.snooker_logo}
@@ -80,87 +83,168 @@ const Hero: React.FC = () => {
             alt="Snooker"
           />
         </div>
+       
+  <div className="w-full max-w-md mx-auto lg:mx-0 hidden sm:block" >
+    <LoginCard showPassword={false} setShowPassword={function (): void {
+                throw new Error("Function not implemented.");
+              } } navigate={undefined} />
+  </div>
+</div>
+        
+        </section>
+        </SwiperSlide>
+       <SwiperSlide>
+  <div className="border-b-2 border-[#d4af37] relative overflow-hidden h-full">
 
-        {/* RIGHT — Login Card */}
-        <div className="hidden lg:block flex-none w-[320px] xl:w-90 2xl:w-100">
-          <LoginCard showPassword={showPassword} setShowPassword={setShowPassword} navigate={navigate}/>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-
-
-const LoginCard: React.FC<LoginCardProps> = ({ showPassword, setShowPassword ,navigate })=> (
-  // CHANGE: padding py-8 se py-6 aur gap space-y-5 se space-y-4 kiya card ko thoda chota dikhane ke liye
-  <div className="w-full bg-black border border-[#d4af37]/40 rounded-xl px-6 sm:px-8 py-6 shadow-[0_0_40px_rgba(212,175,55,0.08)]">
-    
-    {/* Logo */}
-    <img
-      src={assets.logo1}
-      className="h-10 mx-auto mb-5 object-contain"
-      alt="Royal Mega"
+    {/* Background decorations */}
+    <div
+      className="absolute left-0 top-0 w-[40%] h-full opacity-60 pointer-events-none"
+      style={{
+        backgroundImage: `url(${assets.HeroDesign})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "contain",
+      }}
     />
+    <div
+      className="absolute right-0 top-0 w-[40%] h-full opacity-60 pointer-events-none"
+      style={{
+        backgroundImage: `url(${assets.HeroDesign})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "contain",
+        transform: "scaleX(-1)",
+      }}
+    />
+    <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_30%,#d4af37,transparent_40%)]" />
+    <div className="relative flex sm:hidden flex-row items-center justify-between px-2 py-1 h-50 gap-1 text-white">
 
-    <div className="space-y-4 text-gray-300 text-sm">
-      
-      <div className="space-y-1">
-        <label className="block text-gray-400 text-[10px] uppercase tracking-widest">
-          Email or mobile *
-        </label>
-        <input
-          className="w-full px-4 py-2.5 rounded-full bg-white text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#d4af37]/60 transition"
-          placeholder="Enter your email or mobile"
+      <div className="flex flex-col items-center gap-1 shrink-0">
+        <button
+          onClick={() => swiperRef.current?.slidePrev()}
+          className="px-2 py-0.5 bg-[#d4af37] text-black rounded text-[9px] font-medium"
+        >
+          ← Prev
+        </button>
+        <Swiper
+          direction="vertical"
+          slidesPerView={3}
+          centeredSlides={true}
+          loop={true}
+          spaceBetween={8}
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          className="h-16 w-8"
+        >
+          {[...numbers, ...numbers, ...numbers].map((num, index) => (
+            <SwiperSlide key={index}>
+              <div className="w-full h-full flex items-center justify-center text-white text-xs">
+                {num}
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <button
+          onClick={() => swiperRef.current?.slideNext()}
+          className="px-2 py-0.5 bg-[#d4af37] text-black rounded text-[9px] font-medium"
+        >
+          Next →
+        </button>
+      </div>
+
+      {/* Center Text */}
+      <div className="flex flex-col gap-1 flex-1 min-w-0">
+        <h1 className="text-xs font-semibold leading-tight">Lottery</h1>
+        <p className="text-gray-300 text-[8px] leading-snug line-clamp-4">
+          Join the excitement with Royal Mega's Lottery games, offering you
+          the chance to turn dreams into reality with every ticket.
+          Whether you're playing for fun or aiming for a life-changing win,
+          our easy-to-play lotteries bring you closer to incredible prizes.
+        </p>
+      </div>
+
+      <div className="flex flex-col items-center justify-center gap-1 shrink-0">
+        <h2 className="font-bold text-base leading-none">
+          ₹<span className="text-2xl">5</span>cr
+        </h2>
+        <button className="bg-red-500 hover:bg-red-600 transition px-2 py-1 rounded flex items-center gap-1 text-[8px]">
+          ▶ Buy
+        </button>
+      </div>
+
+      <div className="shrink-0 w-14">
+        <img
+          src={assets.snooker_logo}
+          className="w-full h-full object-contain"
+          alt="Snooker"
+        />
+      </div>
+    </div>
+
+    <div className="relative hidden sm:grid grid-cols-12 items-center px-6 py-4 h-100 mt-5">
+
+      <div className="flex flex-col items-center justify-center">
+        <button
+          onClick={() => swiperRef.current?.slidePrev()}
+          className="mb-3 px-4 py-1 bg-[#d4af37] text-black rounded-md text-sm font-medium"
+        >
+          ← Previous
+        </button>
+        <Swiper
+          direction="vertical"
+          slidesPerView={5}
+          centeredSlides={true}
+          loop={true}
+          spaceBetween={15}
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          className="h-37.5"
+        >
+          {[...numbers, ...numbers, ...numbers].map((num, index) => (
+            <SwiperSlide key={index}>
+              <div className="w-10 h-10 flex items-center justify-center text-white text-lg">
+                {num}
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <button
+          onClick={() => swiperRef.current?.slideNext()}
+          className="mt-3 px-4 py-1 bg-[#d4af37] text-black rounded-md text-sm font-medium"
+        >
+          Next →
+        </button>
+      </div>
+
+      <div className="col-span-5 pl-6">
+        <h1 className="text-2xl font-semibold mb-3 text-white">Lottery</h1>
+        <p className="text-white text-sm max-w-md font-semibold">
+          Join the excitement with Royal Mega's Lottery games, offering you
+          the chance to turn dreams into reality with every ticket.
+          Whether you're playing for fun or aiming for a life-changing win,
+          our easy-to-play lotteries bring you closer to incredible prizes.
+          Try your luck today and see if fortune favours you!
+        </p>
+      </div>
+
+      <div className="col-span-3 flex flex-col items-center justify-center text-white">
+        <h2 className="text-4xl font-bold mb-3">
+          ₹<span className="text-6xl">5</span>cr
+        </h2>
+        <button className="bg-red-500 hover:bg-red-600 transition px-4 py-2 rounded flex items-center gap-2">
+          ▶ Buy Tickets
+        </button>
+      </div>
+
+      <div className="col-span-3 flex justify-center">
+        <img
+          src={assets.snooker_logo}
+          className="w-full max-w-105 object-contain"
+          alt="Snooker"
         />
       </div>
 
-      <div className="space-y-1">
-        <div className="flex justify-between items-center">
-          <label className="text-gray-400 text-[10px] uppercase tracking-widest">Password *</label>
-          <span className="text-[#e63946] text-xs cursor-pointer hover:underline">Forgot Password?</span>
-        </div>
-        <div className="relative">
-          <input
-            className="w-full px-4 py-2.5 rounded-full bg-white text-black placeholder:text-gray-400 pr-12 focus:outline-none focus:ring-2 focus:ring-[#d4af37]/60 transition"
-            type={showPassword ? "text" : "password"}
-            placeholder="Enter your password"
-          />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition"
-          >
-            {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-          </button>
-        </div>
-      </div>
-
-
-      <div className="space-y-1">
-        <label className="block text-gray-400 text-[10px] uppercase tracking-widest">
-          Code (optional)
-        </label>
-        <input
-          className="w-full px-4 py-2.5 rounded-full bg-white text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#d4af37]/60 transition"
-          placeholder="Enter your code"
-        />
-      </div>
-
- 
-      <button className="w-full bg-linear-to-r from-[#E3BA5D]/80 via-[#FFDEAC] to-[#D4AC54] py-2.5 mt-2 rounded-full text-black font-bold text-sm tracking-wide shadow-[0_4px_20px_rgba(212,175,55,0.35)] hover:opacity-90 active:scale-[0.98] transition">
-        Login
-      </button>
-
-      <p className="text-center text-xs text-gray-400 mt-3">
-        Not registered yet?{" "}
-        <span className="text-[#d4af37] cursor-pointer hover:underline font-medium" 
-        onClick={() => navigate("/register")}>
-          Create an Account
-        </span>
-      </p>
     </div>
   </div>
-);
+</SwiperSlide>
+        </Swiper>
+  
+  )}
 
 export default Hero;
