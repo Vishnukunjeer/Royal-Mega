@@ -3,10 +3,7 @@ import Header from "@/layouts/Header"
 import Footer from "@/layouts/Footer"
 import { assets } from "@/assets/assets"
 import { Calendar, ChevronLeft, ChevronRight, } from 'lucide-react';
-import { useState, useEffect ,useRef} from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import  'swiper/css';
-import 'swiper/css/navigation';
+import { useState, useEffect } from 'react';
 import MobileFooter from "@/layouts/Mobile";
 import {Link} from "react-router-dom"
 import Hero from "../Hero/Hero";
@@ -14,9 +11,8 @@ import Hero from "../Hero/Hero";
 const Result = () => {
 
     const [activeDrawIndex, setActiveDrawIndex] = useState(0);
-    const swiperRef = useRef<any>(null);
+    
 
-  const numbers = [1,2,3,4,5,6,7,8,9,10];
   
     // Timer State
     const [timeLeft, setTimeLeft] = useState(3660);
@@ -112,7 +108,6 @@ const Result = () => {
     setActiveDrawIndex((prev) => (prev === availableDraws.length - 1 ? 0 : prev + 1));
   };
   
-  const currentDraw = availableDraws[activeDrawIndex];
 
   
   return (
@@ -177,7 +172,7 @@ const Result = () => {
                 className="flex transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateX(-${activeDrawIndex * 100}%)` }}
               >
-                {availableDraws.map((draw, index) => (
+                {availableDraws.map((draw) => (
                   <div key={draw.id} className="min-w-full flex justify-center px-4">
                     <div className="w-full max-w-2xl bg-linear-to-r from-[#e1bb58] via-[#d1a646] to-[#b98d35] rounded-xl p-5 flex items-center justify-between border border-white/20 relative shadow-lg text-black">
                       <div className="flex items-center gap-4 flex-1">

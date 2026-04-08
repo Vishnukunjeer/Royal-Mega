@@ -251,11 +251,11 @@ export default function LottoSection() {
 
                
 
-          {/* ✅ Selected Numbers Bar */}
+          {/* Selected Numbers Bar */}
           <div className="px-8 pb-4">
             <div className=" rounded-xl p-5 flex items-center justify-between bg-white">
 
-              {/* Selected balls — clickable to remove */}
+             
               <div className="flex items-center gap-50">
                 <span className="text-[#2b3a55] font-semibold text-sm whitespace-nowrap">Selected numbers:</span>
                 <div className="flex items-center gap-2">
@@ -275,7 +275,7 @@ export default function LottoSection() {
                     </button>
                   ))}
 
-                  {/* Mega ball slot */}
+                  
                   <button
                     onClick={() => selectedMega && toggleMegaBall(selectedMega)}
                     title={selectedMega ? `Remove ${selectedMega}` : ''}
@@ -306,7 +306,7 @@ export default function LottoSection() {
 
 
             <div className="mt-4 mb-6 md:mb-8 px-4 md:px-8 flex items-center justify-between w-full">
-              {/* Entry Box (Not full rounded) */}
+              
               <div className="bg-[#dfb850] text-black font-bold text-sm md:text-base px-6 md:px-10 py-3 rounded-r-lg shadow-sm -ml-4 md:-ml-8">
                 Entry ₹{TICKET_PRICE}
               </div>

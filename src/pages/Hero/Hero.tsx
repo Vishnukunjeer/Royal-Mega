@@ -16,7 +16,7 @@ const numbers = [1, 2, 3, 4, 5];
     <Swiper
     modules={[Autoplay]}
   autoplay={{
-    delay: 10000, // 3 seconds
+    delay: 10000, 
     disableOnInteraction: false,
   }}
   loop={true}
@@ -43,7 +43,7 @@ const numbers = [1, 2, 3, 4, 5];
         }}
       />
 
-      <div className="flex flex-row items-center justify-between px-4 sm:px-4 lg:px-10 py-6">
+      <div className="flex flex-row items-center justify-between px-4 sm:px-4 lg:px-10 py-4 mt-6">
         
         <div className="w-[57%] sm:w-[45%] lg:w-[30%] ">
           <h1 className="text-[#f8dc65] text-lg lg:text-3xl sm:text-xs font-bold ">
