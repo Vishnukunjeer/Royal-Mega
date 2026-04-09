@@ -81,8 +81,8 @@ export default function CartPage() {
             </div>
 
             <div className="mt-4 space-y-4">
-              {cartItems.length === 0 ? (
-                <p className="text-gray-500 py-10">Your cart is empty.</p>
+              {cartItems.length == 0 ? (
+                <p className="text-gray-500 py-10 text-center">Your cart is empty</p>
               ) : (
                 cartItems.map((item) => (
                   <div key={item.id} className="grid grid-cols-1 md:grid-cols-13 gap-4 md:items-center  pb-6 pt-2">
@@ -256,9 +256,21 @@ export default function CartPage() {
         </div>
 
         {cartItems.length === 0 ? (
-          <p className="text-gray-500 text-center mt-10">
+          <div>
+       <div
+              className="absolute right-0 top-1.5  w-full h-[60%] opacity-60 pointer-events-none"
+              style={{
+                backgroundImage: `url(${assets.HeroDesign})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "contain",
+              }}
+            />
+            <img src={assets.Empty_cart} alt="cart-section" className='ml-25 mt-25'/>
+          <p className=" text-center mt-2 font-bold">
             Your cart is empty
           </p>
+          <p className='text-center'>Looks like you haven’t added <br /> anything to your cart yet </p>
+          </div>
         ) : (
           cartItems.map((item) => (
             <MobileCartCard

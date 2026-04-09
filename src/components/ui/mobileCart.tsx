@@ -1,6 +1,7 @@
 import React from "react";
 import { Trash2 } from "lucide-react";
 
+
 type Props = {
   title: string;
   date: string;
@@ -20,7 +21,7 @@ const MobileCartCard: React.FC<Props> = ({
 }) => {
   const isSingleTicket = numbers.length === 1;
   const hasMultipleTickets = numbers.length > 1;
-
+  
   return (
     <div className="pb-4 border-b border-gray-700">
       {/* 🔝 Top Row */}
@@ -70,6 +71,7 @@ const MobileCartCard: React.FC<Props> = ({
           </button>
         </div>
       )}
+
     </div>
   );
 };

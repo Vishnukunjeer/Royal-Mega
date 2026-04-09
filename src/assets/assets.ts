@@ -27,10 +27,11 @@ import bg_cards from "./1164976520.png"
 import mobileLotto from "./lottery-header-right.png"
 import WalletWallpaper from "./human-hand-with-casino-chips-green-table 1.png"
 import register from "./register.png"
-
+import Empty_cart from "./47683_webshop_ecommerce_empty_shopping cart_icon 1.png"
 
 export const assets = {
     logo,
+    Empty_cart,
     register,
     WalletWallpaper,
     mobileLotto,
