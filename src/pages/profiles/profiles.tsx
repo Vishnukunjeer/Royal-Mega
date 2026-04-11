@@ -1,10 +1,10 @@
-import Header from "@/layouts/Header"
-import Footer from "@/layouts/Footer"
+
 import { useState } from "react"
 import { assets } from "@/assets/assets"
 import { Calendar, CircleUser, Wallet, ScrollText, Settings } from "lucide-react"
 import MobileFooter from "@/layouts/Mobile"
 import { MobileProfile } from "@/components/ui/mobileProfile"
+import { useGetUserQuery } from "@/sevices/api";
 
 const Profile = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -12,10 +12,18 @@ const Profile = () => {
   const menu = [
     { name: "Profile", icon: CircleUser }, { name: "Wallet", icon: Wallet }, { name: "Bet History", icon: ScrollText }, { name: "Account", icon: Wallet }, { name: "Settings", icon: Settings }]
 
-  const storedUser = JSON.parse(localStorage.getItem("user") || "{}")
-  const user = {
-    name: storedUser?.email?.split("@")[0] || "admin",
-    email: storedUser?.email || "admin@gmail.com",
+    const token = localStorage.getItem("token")
+  const { data, isLoading } = useGetUserQuery(undefined, {
+  skip: !token,
+});
+
+const user = {
+  name: data?.username || "Loading...",
+  email: data?.email || "",
+};
+
+ if (isLoading) {
+    return <div className="text-white p-10">Loading profile...</div>;
   }
 
   return (
@@ -25,7 +33,7 @@ const Profile = () => {
       </div>
       <div className="bg-black text-white min-h-screen hidden sm:block">
 
-        <Header className="hidden sm:block" />
+
         <div
           className="absolute left-0 top-0 w-[40%] h-full opacity-80 pointer-events-none"
           style={{
@@ -48,7 +56,7 @@ const Profile = () => {
         </div>
 
         <div className="max-w-6xl mx-auto px-4 py-20 flex min-h-screen bg-black/25">
-          <div className="border border-[#d4af37]/40 rounded-xl flex overflow-hidden min-h-175 w-full">
+          <div className="border border-primary/40 rounded-xl flex overflow-hidden min-h-175 w-full">
 
             {menuOpen && (
               <div
@@ -57,10 +65,10 @@ const Profile = () => {
               />
             )}
             <div
-              className={`border border-[#d4af37]/40  h-full w-64 bg-black z-50 transform transition-transform duration-300
+              className={`border border-primary/40  h-full w-64 bg-black z-50 transform transition-transform duration-300
   ${menuOpen ? "translate-x-0" : "-translate-x-full"} 
   sm:translate-x-0 sm:static sm:block`}
-            ><div className="border-b border-[#d4af37]/40 mb-2">
+            ><div className="border-b border-primary/40 mb-2">
                 <div className="flex flex-col items-center m-6">
                   <img src={assets.logo1} alt="logo" className="w-50 m-2" />
                 </div>
@@ -74,7 +82,7 @@ const Profile = () => {
                       key={item.name}
                       onClick={() => setActiveTab(item.name)}
                       className={`px-4 py-2 rounded-full cursor-pointer -ml-4 mr-2 whitespace-nowrap flex flex-row  ${activeTab === item.name
-                        ? "bg-[#D4AC54] text-black font-semibold"
+                        ? "bg-primary    text-black font-semibold"
                         : "hover:bg-[#111]"
                         }`}
                     >
@@ -110,7 +118,7 @@ const Profile = () => {
                     </div>
                     {/* RIGHT (BUTTONS) */}
                     <div className="flex flex-col gap-3">
-                      <button className="bg-linear-to-r from-[#D4AC54] to-[#E3BA5D] text-black px-10 py-2 rounded-full text-sm font-medium hidden sm:block">
+                      <button className="bg-linear-to-r from-primary to-[#E3BA5D] text-black px-10 py-2 rounded-full text-sm font-medium hidden sm:block">
                         Save
                       </button>
                       <button className="bg-white text-black px-10 py-2 rounded-full text-sm font-medium hidden sm:block">
@@ -124,7 +132,7 @@ const Profile = () => {
                     <div>
                       <label className="text-xs text-gray-400">First Name</label>
                       <input
-                        placeholder="User Name"
+                        placeholder="Username"
                         value={user.name}
                         disabled
                         className=" w-full mt-1 p-3 bg-[#222] rounded text-gray-300"
@@ -184,10 +192,10 @@ const Profile = () => {
                   <div className="bg-[#111] p-6 rounded-xl flex justify-between items-center">
                     <div>
                       <p className="text-gray-400">Balance</p>
-                      <h1 className="text-3xl text-[#d4af37]">₹12,500</h1>
+                      <h1 className="text-3xl text-primary">₹12,500</h1>
                     </div>
 
-                    <button className="bg-[#d4af37] text-black px-5 py-2 rounded-full">
+                    <button className="bg-primary text-black px-5 py-2 rounded-full">
                       Add Money
                     </button>
                   </div>
@@ -199,7 +207,7 @@ const Profile = () => {
                 <div className="bg-[#111] p-5 rounded-xl border border-[#d4af37]/30">
 
                   {/* 🔹 TITLE */}
-                  <h2 className="text-lg mb-5 border-b border-[#d4af37] pb-2 text-white">
+                  <h2 className="text-lg mb-5 border-b border-primary pb-2 text-white">
                     History
                   </h2>
 
@@ -208,7 +216,7 @@ const Profile = () => {
 
                     <div className="flex flex-col">
                       <label className="mb-1">Game</label>
-                      <select className="bg-[#111] border border-[#d4af37] px-3 py-1.5 rounded text-xs text-white" aria-label="game">
+                      <select className="bg-[#111] border border-primary px-3 py-1.5 rounded text-xs text-white" aria-label="game">
                         <option>All</option>
                         <option>Royal Lotto</option>
                         <option>Lottery</option>
@@ -217,7 +225,7 @@ const Profile = () => {
 
                     <div className="flex flex-col">
                       <label className="mb-1">Draw Name</label>
-                      <select className="bg-[#111] border border-[#d4af37] px-3 py-1.5 rounded text-xs text-white" aria-label="DrawName">
+                      <select className="bg-[#111] border border-primary px-3 py-1.5 rounded text-xs text-white" aria-label="DrawName">
                         <option>All</option>
                       </select>
                     </div>
@@ -230,7 +238,7 @@ const Profile = () => {
                           type="text"
                           value="20/06/2024 - 25/06/2024"
                           readOnly
-                          className="bg-[#111] border border-[#d4af37] px-3 py-1.5 rounded text-xs text-white w-50"
+                          className="bg-[#111] border border-primary px-3 py-1.5 rounded text-xs text-white w-50"
                         />
                         <p className="absolute right-2 top-6"><Calendar className="size-4.5 text-white
         " /></p>
@@ -239,7 +247,7 @@ const Profile = () => {
 
                     <div className="flex flex-col">
                       <label className="mb-1">Status</label>
-                      <select className="bg-[#111] border border-[#d4af37] px-3 py-1.5 rounded text-xs text-white" aria-label="Status">
+                      <select className="bg-[#111] border border-primary px-3 py-1.5 rounded text-xs text-white" aria-label="Status">
                         <option>All</option>
                         <option>Won</option>
                         <option>Loss</option>
@@ -250,10 +258,10 @@ const Profile = () => {
                   </div>
 
 
-                  <div className="border border-[#d4af37]/40 rounded-xl overflow-x-auto scrollbar-hide max-w-full">
+                  <div className="border border-primary/40 rounded-xl overflow-x-auto scrollbar-hide max-w-full">
 
 
-                    <div className="bg-linear-to-r from-[#d4af37] to-[#a07a2c] text-black text-xs font-semibold flex min-w-212.5 px-3 py-2 rounded-t-xl">
+                    <div className="bg-linear-to-r from-primary to-[#a07a2c] text-black text-xs font-semibold flex min-w-212.5 px-3 py-2 rounded-t-xl">
 
                       <div className="w-10">S.N.</div>
                       <div className="w-27.5">Ticket ID</div>
@@ -311,7 +319,7 @@ const Profile = () => {
               ${i % 3 === 0
                                 ? "bg-green-500"
                                 : i % 2 === 0
-                                  ? "bg-yellow-400 text-black"
+                                  ? "bg-primary text-black"
                                   : "bg-red-500"
                               }`}
                           >
@@ -329,7 +337,7 @@ const Profile = () => {
                     {[1, 2, 3, 4, 5].map((n) => (
                       <button
                         key={n}
-                        className={`w-7 h-7 border border-[#d4af37] rounded text-xs ${n === 1 ? "bg-[#d4af37] text-black" : "text-white"
+                        className={`w-7 h-7 border border-primary rounded text-xs ${n === 1 ? "bg-primary text-black" : "text-white"
                           }`}
                       >
                         {n}
@@ -344,7 +352,7 @@ const Profile = () => {
               {activeTab === "Account" && (
                 <>
                   <h2 className="text-xl mb-6">Bank Details</h2>
-                  <button className="bg-[#d4af37] text-black px-5 py-2 rounded">
+                  <button className="bg-primary text-black px-5 py-2 rounded">
                     + Add Account
                   </button>
                 </>
@@ -353,8 +361,8 @@ const Profile = () => {
 
               {activeTab === "Settings" && (
                 <>
-                  {/* 🔹 HEADER */}
-                  <div className="flex justify-between items-center border-b border-[#d4af37] pb-4 mb-6">
+                  {/* 🔹   */}
+                  <div className="flex justify-between items-center border-b border-primary pb-4 mb-6">
                     <h2 className="text-xl font-semibold">Change Password</h2>
 
 
@@ -366,7 +374,7 @@ const Profile = () => {
                       Change password
                     </button>
 
-                    <button className="bg-linear-to-r from-[#D4AC54] to-[#E3BA5D] text-black px-6 py-2 rounded-full text-sm">
+                    <button className="bg-linear-to-r from-primary    to-[#E3BA5D] text-black px-6 py-2 rounded-full text-sm">
                       Save
                     </button>
                   </div>
@@ -426,7 +434,7 @@ const Profile = () => {
         <div className="lg:hidden">
           <MobileFooter />
         </div>
-        <Footer className=" hidden sm:block md:block" />
+
 
       </div>
     </>

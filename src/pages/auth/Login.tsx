@@ -1,8 +1,11 @@
-import { useState,} from "react"
+import { useState, } from "react"
 import { Eye, EyeOff } from "lucide-react"
 import { assets } from "@/assets/assets"
-import { useNavigate ,Link} from "react-router-dom"
-import { DUMMY_ADMIN, DUMMY_USER } from "@/data/dummyUser"
+import { useNavigate, Link } from "react-router-dom"
+import { toast } from "react-hot-toast"
+import { useDispatch, } from "react-redux"
+import { useGetUserQuery, useLoginMutation } from "@/sevices/api"
+import {setCredentials } from "@/store/slices/authSlice"
 type ErrorType = {
   email?: string
   password?: string
@@ -12,60 +15,66 @@ type ErrorType = {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
-  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [error,setError] = useState<ErrorType>({})
+  const [error, setError] = useState<ErrorType>({})
+  const [login, {isLoading}] = useLoginMutation();
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   
-const handleLogin = (e:React.MouseEvent<HTMLButtonElement>) => {
-  e.preventDefault()
 
-  const newErrors:ErrorType = {}
+  const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
 
-  if (!email) {
-    newErrors.email = "Email is required"
-  } else if (!validateEmail(email)) {
-    newErrors.email = "Enter a valid email"
-  }
+    try{
+      const data ={
+        username,
+        password,
+        devices: "desktop",
+        type:"Password"
+      }
+    
+      const response = await login(data).unwrap();
 
-  if (!password) {
-    newErrors.password = "Password is required"
-  }
+      const token =
+      response?.accessToken ||
+      response?.token ||
+      response?.access_token
 
-  if (Object.keys(newErrors).length > 0) {
-    setError(newErrors)
-    return
-  }
+    if (token) {
+      localStorage.setItem("token",token);
+      dispatch(setCredentials(token))
+    }
 
-  if (
-    (email === DUMMY_USER.email && password === DUMMY_USER.password) ||
-    (email === DUMMY_ADMIN.email && password === DUMMY_ADMIN.password)
-  ) {
-    localStorage.setItem("isAuth", "true")
-    localStorage.setItem("user", JSON.stringify(DUMMY_USER))
+    localStorage.setItem("isAuth","true")
+
     navigate("/dashboard")
-  } else {
-    alert("Invalid email or password")
-  }
-}
+    toast.success("logged in succesfully");
 
-const validateEmail = (email:string):boolean => {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-}
+    } catch (err: any) {
+      toast.error(err?.data.message || "Login failed")
+    }
+  }
+ const token = localStorage.getItem("token");
+
+const { data: user } = useGetUserQuery(undefined, {
+  skip: !token,
+});
+
 
   return (
     <div className="flex min-h-screen bg-black">
 
       <div className="w-full md:w-[40%] flex items-center justify-center px-6">
         <div className="w-full max-w-md">
-          <Link to = "/">
-          <img
-            src={assets.logo1}
-            className="h-14 mx-auto mb-10 drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]"
-            alt="Royal Mega"
-            
-          />
+          <Link to="/">
+            <img
+              src={assets.logo1}
+              className="h-14 mx-auto mb-10 drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]"
+              alt="Royal Mega"
+
+            />
           </Link>
 
           <div className="space-y-5 text-white">
@@ -76,8 +85,8 @@ const validateEmail = (email:string):boolean => {
               </label>
               <input
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 className="w-full mt-2 px-4 py-3 rounded-full bg-gray-200 text-black"
                 placeholder="Enter your email"
               />
@@ -96,7 +105,7 @@ const validateEmail = (email:string):boolean => {
 
               <div className="relative mt-2">
                 <input
-                 required
+                  required
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -104,8 +113,8 @@ const validateEmail = (email:string):boolean => {
                   placeholder="Enter your password"
                 />
                 {error.password && (
-  <p className="text-red-500 text-xs mt-1">{error.password}</p>
-)}
+                  <p className="text-red-500 text-xs mt-1">{error.password}</p>
+                )}
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -119,15 +128,15 @@ const validateEmail = (email:string):boolean => {
 
             <button
               onClick={handleLogin}
-              className="w-full py-3 rounded-full font-bold text-black bg-linear-to-r from-[#E3BA5D] via-[#FFDEAC] to-[#D4AC54] shadow-lg hover:scale-105 transition"
+              className={`w-full py-3 rounded-full font-bold text-black bg-linear-to-r from-[#E3BA5D] via-[#FFDEAC] to-primary    shadow-lg transition ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:scale-105'}`}
             >
-              Login
+               {isLoading ? "Logging in..." : "Login"}
             </button>
 
             <p className="text-center text-sm text-gray-400">
               Not registered yet?{" "}
               <span onClick={() => navigate("/register")}
-               className="text-yellow-400 cursor-pointer">
+                className="text-yellow-400 cursor-pointer">
                 Create an Account
               </span>
             </p>
@@ -146,8 +155,8 @@ const validateEmail = (email:string):boolean => {
         <div className="absolute inset-0 bg-black/40" />
 
         <div className="absolute top-20 left-16 text-white max-w-md z-10">
-          
-          <div className="bg-black/70 backdrop-blur-md px-5 py-4 rounded-lg">
+
+          <div className="px-5 py-4 rounded-lg">
             <h1 className="text-3xl font-bold mb-2">
               Welcome back,
             </h1>

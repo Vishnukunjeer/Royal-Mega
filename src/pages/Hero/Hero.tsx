@@ -73,15 +73,10 @@ const numbers = [1, 2, 3, 4, 5];
 
         <div className="w-[45%] h-full flex justify-end items-center">
           <img
-            src={assets.snooker_logo}
-            className="w-full h-full
-    sm:w-30 
-    lg:w-100 
-    max-w-120
-    object-contain"
-    scale-125 sm:scale-110 lg:scale-100
-            alt="Snooker"
-          />
+  src={assets.snooker_logo}
+  className="w-full h-full sm:w-30 lg:w-100 max-w-120 object-contain scale-125 sm:scale-110 lg:scale-100"
+  alt="Snooker"
+/>
         </div>
        
   <div className="w-full max-w-md mx-auto lg:mx-0 hidden sm:block" >
@@ -94,7 +89,7 @@ const numbers = [1, 2, 3, 4, 5];
         </section>
         </SwiperSlide>
        <SwiperSlide>
-  <div className="border-b-2 border-[#d4af37] relative overflow-hidden h-full">
+  <div className="border-b-2 border-primary relative overflow-hidden h-full">
 
     {/* Background decorations */}
     <div
@@ -120,7 +115,7 @@ const numbers = [1, 2, 3, 4, 5];
       <div className="flex flex-col items-center gap-1 shrink-0">
         <button
           onClick={() => swiperRef.current?.slidePrev()}
-          className="px-2 py-0.5 bg-[#d4af37] text-black rounded text-[9px] font-medium"
+          className="px-2 py-0.5 bg-primary text-black rounded text-[9px] font-medium"
         >
           ← Prev
         </button>
@@ -143,7 +138,7 @@ const numbers = [1, 2, 3, 4, 5];
         </Swiper>
         <button
           onClick={() => swiperRef.current?.slideNext()}
-          className="px-2 py-0.5 bg-[#d4af37] text-black rounded text-[9px] font-medium"
+          className="px-2 py-0.5 bg-primary text-black rounded text-[9px] font-medium"
         >
           Next →
         </button>
@@ -183,7 +178,7 @@ const numbers = [1, 2, 3, 4, 5];
       <div className="flex flex-col items-center justify-center">
         <button
           onClick={() => swiperRef.current?.slidePrev()}
-          className="mb-3 px-4 py-1 bg-[#d4af37] text-black rounded-md text-sm font-medium"
+          className="mb-3 px-4 py-1 bg-primary text-black rounded-md text-sm font-medium"
         >
           ← Previous
         </button>
@@ -206,7 +201,7 @@ const numbers = [1, 2, 3, 4, 5];
         </Swiper>
         <button
           onClick={() => swiperRef.current?.slideNext()}
-          className="mt-3 px-4 py-1 bg-[#d4af37] text-black rounded-md text-sm font-medium"
+          className="mt-3 px-4 py-1 bg-primary text-black rounded-md text-sm font-medium"
         >
           Next →
         </button>

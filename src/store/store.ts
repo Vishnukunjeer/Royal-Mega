@@ -1,11 +1,17 @@
 // src/store/store.ts
 import { configureStore } from '@reduxjs/toolkit';
-import cartReducer from '@/store/slices/cartSlice'; // Ye wo slice hai jo humne pehle banaya tha
+import cartReducer from '@/store/slices/cartSlice';
+import authReducer from '@/store/slices/authSlice'
+import { api } from '@/sevices/api';
 
 export const store = configureStore({
   reducer: {
-    cart: cartReducer, // Cart state ko store me register kar diya
+    cart: cartReducer,
+    [api.reducerPath]: api.reducer,
+    auth: authReducer
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
 });
 
 // TypeScript ke liye types export kar rahe hain (Taaki useSelector me error na aaye)

@@ -4,6 +4,7 @@ import { addToCart } from '@/store/slices/cartSlice';
 import { Calendar, ChevronLeft, ChevronRight, X, RefreshCw } from 'lucide-react';
 import { assets } from '@/assets/assets';
 import MobileLotto from '@/components/ui/mobileLotto';
+import {toast} from "react-hot-toast"
 
 const formatNumber = (num: number) => num.toString().padStart(2, '0');
 
@@ -67,7 +68,8 @@ export default function LottoSection() {
 
   const handleAddToCart = () => {
     if (selectedMain.length !== 5 || !selectedMega) {
-      alert("Please select 5 Main balls and 1 Mega ball!");
+      toast.error("Please select 5 Main balls and 1 Mega ball!")
+     
       return;
     }
 
@@ -77,7 +79,7 @@ export default function LottoSection() {
       price: TICKET_PRICE,
     }));
 
-    alert("Ticket added to cart!");
+    toast.success("Ticket added to cart!");
   };
 
   const handlePrevDraw = () => {
@@ -312,7 +314,7 @@ export default function LottoSection() {
               </div>
 
               <button
-                onClick={handleAddToCart}
+                onClick={()=>{handleAddToCart();clearSelection()}}
                 className="bg-[#dfb850] text-black font-bold text-sm md:text-base px-8 md:px-12 py-3 rounded-full shadow-md hover:brightness-110 transition-all"
               >
                 Add To Cart

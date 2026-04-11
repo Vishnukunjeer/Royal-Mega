@@ -1,51 +1,58 @@
 import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { ShoppingBag, ChevronDown } from "lucide-react"
-import { useSelector } from "react-redux"
 import { assets } from "../assets/assets"
 import type { RootState } from "@/store/store"
+import { useGetUserQuery } from "@/sevices/api";
+import { useDispatch ,useSelector} from "react-redux";
+import { logout } from "@/store/slices/authSlice";
 
 type HeaderProps = {
-  className ? : string
+  className?: string
 }
 
 
-const Header: React.FC<HeaderProps> = ({className}) => {
+const Header: React.FC<HeaderProps> = ({ className }) => {
+  
+  const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const navigate = useNavigate()
-
-  const isAuth = localStorage.getItem("isAuth")
-  const user = JSON.parse(localStorage.getItem("user") || "{}")
-  const username = user?.email?.split("@")[0] || "User"
+  const token = useSelector((state: RootState) => state.auth.token);
+  const { data: userData } = useGetUserQuery(undefined, {
+  skip: !token,
+  });
+  const isAuth = !!token;
+  const username = userData?.username || "Username";
 
   const cartItems = useSelector((state: RootState) => state?.cart?.items || [])
   const cartItemCount = cartItems.length
   //navitem
   const navItems = [
-  { name: "Home", path: "/" },
-  { name: "About Us", path: "/about" },
-  { name: "Contact", path: "/contact" },
-  { name: "Results", path: "/result" },
-]
+    { name: "Home", path: "/" },
+    { name: "About Us", path: "/about" },
+    { name: "Contact", path: "/contact" },
+    { name: "Results", path: "/result" },
+  ]
 
   const handleLogout = () => {
-    localStorage.removeItem("isAuth")
-    localStorage.removeItem("user")
+    dispatch(logout())
+    localStorage.removeItem("token")
     navigate("/login")
   }
 
   const handleCartClick = () => {
-    if (isAuth === "true") {
+    if (isAuth) {
       navigate("/cart")
     } else {
       navigate("/login", { state: { from: "/cart" } })
     }
   }
+  
 
   return (
-    <nav className= {`bg-black border-b-2 border-[#d4af37] ${className}`}>
-   <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <nav className={`bg-black border-b-2 border-[#d4af37] ${className}`}>
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/">
           <img
@@ -72,7 +79,7 @@ const Header: React.FC<HeaderProps> = ({className}) => {
         <div className="hidden lg:flex items-center gap-6">
 
           {/* 👤 PROFILE */}
-          {isAuth === "true" ? (
+          {isAuth ? (
             <div className="relative">
 
               {/* Profile Button */}
@@ -81,7 +88,7 @@ const Header: React.FC<HeaderProps> = ({className}) => {
                 className="flex items-center gap-2 cursor-pointer text-white"
               >
                 <img
-                  src= "https://i.pravatar.cc/150?img=3"
+                  src="https://i.pravatar.cc/150?img=3"
                   className="w-9 h-9 rounded-full border border-[#d4af37]"
                   aria-label="profile"
                 />
@@ -123,7 +130,7 @@ const Header: React.FC<HeaderProps> = ({className}) => {
 
               <button
                 onClick={() => navigate("/login")}
-                className="px-8 py-2 rounded-full bg-linear-to-r from-[#E3BA5D] via-[#FFDEAC] to-[#D4AC54] text-black font-bold"
+                className="px-8 py-2 rounded-full bg-linear-to-r from-[#E3BA5D] via-[#FFDEAC] to-primary    text-black font-bold"
               >
                 Log in
               </button>
@@ -179,7 +186,7 @@ const Header: React.FC<HeaderProps> = ({className}) => {
           </button>
 
           {/* Auth */}
-          {isAuth === "true" ? (
+          {isAuth ? (
             <button
               onClick={handleLogout}
               className="w-full text-red-400"
@@ -197,7 +204,7 @@ const Header: React.FC<HeaderProps> = ({className}) => {
 
               <button
                 onClick={() => navigate("/login")}
-                className="w-full bg-linear-to-r from-[#E3BA5D] via-[#FFDEAC] to-[#D4AC54] py-2 text-black font-bold rounded"
+                className="w-full bg-linear-to-r from-[#E3BA5D] via-[#FFDEAC] to-primary    py-2 text-black font-bold rounded"
               >
                 Login
               </button>

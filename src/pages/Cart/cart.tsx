@@ -4,9 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Trash2, X } from 'lucide-react';
 import type { RootState } from '@/store/store';
 import { removeFromCart, removeSingleTicket } from '@/store/slices/cartSlice';
-import type { CartItem } from '@/store/slices/cartSlice';
-import Header from '@/layouts/Header';
-import Footer from '@/layouts/Footer';
 import MobileFooter from '@/layouts/Mobile';
 import MobileCartCard from "../../components/ui/mobileCart";
 import { assets } from '@/assets/assets';
@@ -22,7 +19,10 @@ export default function CartPage() {
   const navigate = useNavigate()
 
   const [selectedTicketGroup, setSelectedTicketGroup] = useState<any>(null);
-  const [selectedTicket, setSelectedTicket] = useState<CartItem | null>(null);
+  const [selectedTicketId, setSelectedTicketId] = useState<String | null>(null);
+  const selectedTicket = cartItems.find(
+  item => item.id === selectedTicketId
+);
 
   const renderSequence = (main: number[], mega: number | null, isSmall = false) => (
     <div className="flex items-center flex-wrap gap-1.5">
@@ -57,7 +57,7 @@ export default function CartPage() {
 
   return (
     <>
-      <Header />
+
       <div className=" bg-[#0a0a0a] text-white font-sans py-16 px-4 md:px-10 relative overflow-hidden hidden sm:block">
 
         {/* Background Images */}
@@ -101,7 +101,7 @@ export default function CartPage() {
                         {renderSequence(item.tickets[0].main, item.tickets[0].mega)}
 
                         <button
-                          onClick={() => setSelectedTicket(item)}
+                          onClick={() => setSelectedTicketId(item.id)}
                           className="bg-[#ff4d4d] hover:bg-red-600 text-white text-[10px] font-bold px-5 py-1.5 rounded ml-4
                              shadow-md transition"
                         >
@@ -128,10 +128,10 @@ export default function CartPage() {
 
 
           <div className="flex-1 mt-10 lg:mt-10 hidden sm:block">
-            <div className="bg-linear-to-b from-[#e3c05e] to-[#b38b36] text-black rounded-xl p-6 md:p-8 shadow-2xl">
+            <div className="bg-linear-to-b from-[#e3c05e] to-[#b38b36] text-black rounded-xl pt-8 px-8  shadow-2xl">
               <h2 className="text-2xl font-black mb-6">Cart Total</h2>
 
-              <div className="space-y-4 mb-6 border-b border-black/10 pb-6">
+              <div className="space-y-4 mb-6 pb-6">
                 {cartItems.map((item) => (
                   <div key={`summary-${item.id}`} className="flex justify-between text-sm font-bold">
                     <span className="truncate pr-4 opacity-80">{item.drawName} <span className="font-normal">({item.tickets.length}x)</span></span>
@@ -147,7 +147,7 @@ export default function CartPage() {
 
                   <button
                     onClick={() => setSelectedTicketGroup(mergedCheckoutData as any)}
-                    className="w-full bg-white text-black font-bold py-3.5 rounded-lg shadow-lg hover:scale-[1.02] transition"
+                    className="w-full bg-white text-black font-bold py-3.5 rounded-lg shadow-lg hover:scale-[1.02] transition mt-10"
                   >
                     Checkout
                   </button>
@@ -249,15 +249,15 @@ export default function CartPage() {
 
       <div className="lg:hidden min-h-screen bg-black text-white px-4 py-4 space-y-5">
 
-        {/* Header */}
-        <div className="flex items-center gap-3 bg-[#D4AC54] text-black px-4 py-3 rounded">
+        {/*   */}
+        <div className="flex items-center gap-3 bg-primary    text-black px-4 py-3 rounded">
           <button onClick={() => navigate('/')} className='font-bold text-xl'>← Cart</button>
 
         </div>
 
         {cartItems.length === 0 ? (
           <div>
-       <div
+            <div
               className="absolute right-0 top-1.5  w-full h-[60%] opacity-60 pointer-events-none"
               style={{
                 backgroundImage: `url(${assets.HeroDesign})`,
@@ -265,11 +265,11 @@ export default function CartPage() {
                 backgroundSize: "contain",
               }}
             />
-            <img src={assets.Empty_cart} alt="cart-section" className='ml-25 mt-25'/>
-          <p className=" text-center mt-2 font-bold">
-            Your cart is empty
-          </p>
-          <p className='text-center'>Looks like you haven’t added <br /> anything to your cart yet </p>
+            <img src={assets.Empty_cart} alt="cart-section" className='ml-25 mt-25' />
+            <p className=" text-center mt-2 font-bold">
+              Your cart is empty
+            </p>
+            <p className='text-center'>Looks like you haven’t added <br /> anything to your cart yet </p>
           </div>
         ) : (
           cartItems.map((item) => (
@@ -283,7 +283,7 @@ export default function CartPage() {
                 ...(item.tickets[0]?.main || []),
                 +(item.tickets[0]?.mega || [])
               ]}
-              onView={() => setSelectedTicket(item)}
+              onView={() => setSelectedTicketId(item.id)}
               onDelete={() => dispatch(removeFromCart(item.id))}
             />
           ))
@@ -292,7 +292,7 @@ export default function CartPage() {
         <div className="pt-6 ">
           <button
             onClick={() => navigate("/checkout")}
-            className="fixed w-full bg-[#D4AC54] text-black py-3 rounded font-semibold bottom-20"
+            className="fixed w-full bg-primary    text-black py-3 rounded font-semibold bottom-20"
           >
             Checkout
           </button>
@@ -305,11 +305,11 @@ export default function CartPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
 
           <div className="bg-white text-black rounded-xl w-full max-w-md shadow-2xl flex flex-col h-100 p-5">
-            
 
-              <h3 className="text-lg font-bold text-center">{selectedTicket.drawName}</h3>
-              
-            <div className='border-b border-[#D4AC54]'></div>
+
+            <h3 className="text-lg font-bold text-center">{selectedTicket.drawName}</h3>
+
+            <div className='border-b border-primary   '></div>
 
             <div className="p-4 max-h-64 overflow-y-auto space-y-3">
 
@@ -341,18 +341,16 @@ export default function CartPage() {
 
 
           </div>
-                      
-              <button
-                onClick={() => setSelectedTicket(null)}
-                className="bg-[#D4AC54] text-black px-18 py-3 rounded-full absolute mt-100"
-              >
-                OK
-              </button>
-            
+
+          <button
+            onClick={() => setSelectedTicketId(null)}
+            className="bg-primary    text-black px-18 py-3 rounded-full absolute mt-100"
+          >
+            OK
+          </button>
+
         </div>
       )}
-
-      <Footer className=" hidden sm:block md:block" />
       <MobileFooter className="block lg:hidden " />
     </>
   )

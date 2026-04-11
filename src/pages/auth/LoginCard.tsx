@@ -10,7 +10,7 @@ const LoginCard: React.FC<LoginCardProps> = ({
 }) => {
   return (
     <div className="w-full bg-black border border-[#d4af37]/40 rounded-xl px-6 sm:px-8 py-6 shadow-[0_0_40px_rgba(212,175,55,0.08)]">
-      
+
       {/* Logo */}
       <img
         src={assets.logo1}
@@ -19,7 +19,7 @@ const LoginCard: React.FC<LoginCardProps> = ({
       />
 
       <div className="space-y-4 text-gray-300 text-sm">
-        
+
         {/* Email */}
         <div className="space-y-1">
           <label className="block text-gray-400 text-[10px] uppercase tracking-widest">
@@ -70,7 +70,7 @@ const LoginCard: React.FC<LoginCardProps> = ({
         </div>
 
         {/* Button */}
-        <button className="w-full bg-linear-to-r from-[#E3BA5D]/80 via-[#FFDEAC] to-[#D4AC54] py-2.5 mt-2 rounded-full text-black font-bold text-sm tracking-wide shadow-[0_4px_20px_rgba(212,175,55,0.35)] hover:opacity-90 active:scale-[0.98] transition">
+        <button className="w-full bg-linear-to-r from-[#E3BA5D]/80 via-[#FFDEAC] to-primary    py-2.5 mt-2 rounded-full text-black font-bold text-sm tracking-wide shadow-[0_4px_20px_rgba(212,175,55,0.35)] hover:opacity-90 active:scale-[0.98] transition">
           Login
         </button>
 

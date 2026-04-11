@@ -45,9 +45,9 @@ const LottoDetails = () => {
   return (
     <div className="min-h-screen bg-black text-white">
 
-      {/* HEADER */}
-      <div className="bg-[#d4ac54] text-black px-4 py-3 flex items-center gap-3 font-semibold ">
-       <button onClick={() => navigate("/")} className="text-3xl"> ← </button> Add Royal Lotto
+      {/*   */}
+      <div className="bg-primary   text-black px-4 py-3 flex items-center gap-3 font-semibold ">
+        <button onClick={() => navigate("/")} className="text-3xl"> ← </button> Add Royal Lotto
       </div>
 
       {/* SELECTED NUMBERS */}
@@ -59,8 +59,8 @@ const LottoDetails = () => {
           {mainBalls.map((n) => (
             <div
               key={n}
-              className="w-8 h-8 rounded-full bg-[#D4AC54] flex items-center justify-center text-black text-sm font-bold cursor-pointer"
-              onClick={() => toggleMain(n)} 
+              className="w-8 h-8 rounded-full bg-primary   flex items-center justify-center text-black text-sm font-bold cursor-pointer"
+              onClick={() => toggleMain(n)}
             >
               {n}
             </div>
@@ -85,7 +85,7 @@ const LottoDetails = () => {
 
           <button
             onClick={autoSelect}
-            className="bg-[#D4AC54] text-black px-3 py-1 rounded text-sm"
+            className="bg-primary   text-black px-3 py-1 rounded text-sm"
           >
             Auto select 🔁
           </button>
@@ -107,7 +107,7 @@ const LottoDetails = () => {
                 key={num}
                 onClick={() => toggleMain(num)}
                 className={`w-8 h-8 flex items-center justify-center border text-sm cursor-pointer
-                  ${selected ? "bg-[#D4AC54] text-black font-bold" : ""}
+                  ${selected ? "bg-primary   text-black font-bold" : ""}
                 `}
               >
                 {num}
@@ -143,11 +143,11 @@ const LottoDetails = () => {
 
       {/* FOOTER */}
       <div className="flex justify-between items-center p-4 mt-4">
-        <div className="bg-[#D4AC54] text-black px-4 py-2 rounded font-bold">
+        <div className="bg-primary   text-black px-4 py-2 rounded font-bold">
           Entry ₹40
         </div>
 
-        <button className="bg-[#D4AC54] text-black px-6 py-2 rounded-full font-bold">
+        <button className="bg-primary   text-black px-6 py-2 rounded-full font-bold">
           Add To Cart
         </button>
       </div>

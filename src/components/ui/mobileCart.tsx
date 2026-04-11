@@ -21,16 +21,16 @@ const MobileCartCard: React.FC<Props> = ({
 }) => {
   const isSingleTicket = numbers.length === 1;
   const hasMultipleTickets = numbers.length > 1;
-  
+
   return (
     <div className="pb-4 border-b border-gray-700">
       {/* 🔝 Top Row */}
       <div className="flex flex-row justify-between items-start">
         <div className="flex gap-2">
           <h2 className="font-semibold text-white">{title}</h2>
-          <span className="text-[#D4AC54]">|</span>
-          <p className="font-medium text-white">{date}</p>     
-</div>
+          <span className="text-primary  ">|</span>
+          <p className="font-medium text-white">{date}</p>
+        </div>
         <span className="font-semibold text-white">
           ₹{price.toFixed(2)}
         </span>
@@ -62,7 +62,7 @@ const MobileCartCard: React.FC<Props> = ({
             View Tickets
           </button>
 
-         
+
           <button
             onClick={onDelete}
             className="ml-3 text-red-500"

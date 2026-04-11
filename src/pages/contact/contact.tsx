@@ -1,14 +1,10 @@
-import Footer from "@/layouts/Footer"
-import Header from "@/layouts/Header"
+
 import { assets } from "@/assets/assets"
 import MobileFooter from "@/layouts/Mobile"
 
 const Contact = () => {
   return (
     <div className="bg-black text-white min-h-screen relative overflow-hidden">
-
-      <Header />
-
       <img
         src={assets.bg_dot}
         className="absolute top-0 left-0 opacity-30 w-75"
@@ -86,7 +82,7 @@ const Contact = () => {
             />
 
 
-            <button className="w-full py-3 rounded bg-linear-to-r from-[#E3BA5D] via-[#FFDEAC] to-[#D4AC54] text-black font-bold hover:opacity-90 transition">
+            <button className="w-full py-3 rounded bg-linear-to-r from-[#E3BA5D] via-[#FFDEAC] to-primary    text-black font-bold hover:opacity-90 transition">
               Send message
             </button>
 
@@ -103,9 +99,9 @@ const Contact = () => {
 
       </div>
 
-      <Footer />
+
       <div className="lg:hidden">
-      <MobileFooter/>
+        <MobileFooter />
       </div>
     </div>
   )

@@ -17,7 +17,6 @@ import MegaJackpot from "./MegaJackpot.png"
 import mask from "./Mask.png"
 import card1 from "./cards.png"
 import Login from "./golden-particle-dust-background-wallpaper 2.png"
-
 import lotto from "./Section → about-left.png.png"
 import side_ball from "./10287368 1.png"
 import roullete from "./thumb2 1.png"

@@ -2,7 +2,7 @@
 export interface ButtonProps {
   label: string;
   onClick?: () => void;
-  variant?: 'primary' | 'secondary' | 'gold' | 'outline';
+  variant?: 'primary  ' | 'secondary' | 'gold' | 'outline';
   fullWidth?: boolean;
 }
 
@@ -21,7 +21,7 @@ export interface Draw {
   name: string;
   prize: string;
   date: string;
-  image:string;
+  image: string;
 }
 export interface CardProps {
   title: string;
@@ -37,7 +37,7 @@ export interface LottoGame {
   title: string;
   jackpot: number;
   drawDate: Date;
-  selectedNumbers: number[]; 
+  selectedNumbers: number[];
 }
 
 export interface LotteryCard {
@@ -48,4 +48,10 @@ export interface LotteryCard {
   minutes: number;
   entries: number;
   entryPrice: number;
+}
+
+
+export interface AuthTokens {
+  accessToken: string;
+  refreshToken: string;
 }

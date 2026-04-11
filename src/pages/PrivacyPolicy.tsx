@@ -1,6 +1,4 @@
-import Header from "@/layouts/Header";
 import React from "react";
-import Footer from "@/layouts/Footer"
 import { assets } from "@/assets/assets";
 
 const menuItems = [
@@ -15,32 +13,32 @@ const menuItems = [
 const PrivacyPolicy: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white">
-     <Header/>
-<section className="relative h-75 flex flex-col items-center justify-center text-center bg-linear-to-b from-black/70 to-black">
-       <div
-              className="absolute left-0 top-0 w-[40%] h-full opacity-60 pointer-events-none"
-              style={{
-                backgroundImage: `url(${assets.HeroDesign})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-              }}
-            />
-            <div
-              className="absolute right-0 top-0 w-[40%] h-full opacity-60 pointer-events-none"
-              style={{
-                backgroundImage: `url(${assets.HeroDesign})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                transform: "scaleX(-1)",
-              }}
-            />
+      
+      <section className="relative h-75 flex flex-col items-center justify-center text-center bg-linear-to-b from-black/70 to-black">
+        <div
+          className="absolute left-0 top-0 w-[40%] h-full opacity-60 pointer-events-none"
+          style={{
+            backgroundImage: `url(${assets.HeroDesign})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "contain",
+          }}
+        />
+        <div
+          className="absolute right-0 top-0 w-[40%] h-full opacity-60 pointer-events-none"
+          style={{
+            backgroundImage: `url(${assets.HeroDesign})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "contain",
+            transform: "scaleX(-1)",
+          }}
+        />
         <div
           className="absolute inset-0 bg-cover bg-center opacity-60"
           style={{
             backgroundImage:
               `url(${assets.bg_cards})`,
-              backgroundSize:"1000px",
-              backgroundRepeat:"no-repeat"
+            backgroundSize: "1000px",
+            backgroundRepeat: "no-repeat"
           }}
         />
         <h1 className="text-3xl font-semibold z-10">
@@ -69,13 +67,13 @@ const PrivacyPolicy: React.FC = () => {
           </aside>
 
           <main className="flex-1 max-w-3xl mx-auto">
-            
+
             <section className="mb-10">
               <h2 className=" text-lg font-semibold mb-3">
                 Overview
               </h2>
               <p className="text-gray-400 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Suspendisse efficitur varius orci, eget posuere metus facilisis nec.
               </p>
             </section>
@@ -126,7 +124,7 @@ const PrivacyPolicy: React.FC = () => {
         </div>
       </div>
 
-      <Footer/>
+     
     </div>
   );
 };
