@@ -6,9 +6,9 @@ import type { RootState } from '@/store/store';
 import { removeFromCart, removeSingleTicket } from '@/store/slices/cartSlice';
 import MobileFooter from '@/layouts/Mobile';
 import MobileCartCard from "../../components/ui/mobileCart";
-import { assets } from '@/assets/assets';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { BackGroundImg } from '@/components/common/backGroundImg';
 
 export default function CartPage() {
 
@@ -61,9 +61,7 @@ export default function CartPage() {
       <div className=" bg-[#0a0a0a] text-white font-sans py-16 px-4 md:px-10 relative overflow-hidden hidden sm:block">
 
         {/* Background Images */}
-        <div className="absolute left-0 top-0 w-[40%] h-full opacity-60 pointer-events-none" style={{ backgroundImage: `url(${assets.HeroDesign})`, backgroundRepeat: "no-repeat", backgroundSize: "contain" }} />
-        <div className="absolute right-0 top-0 w-[40%] h-full opacity-60 pointer-events-none" style={{ backgroundImage: `url(${assets.HeroDesign})`, backgroundRepeat: "no-repeat", backgroundSize: "contain", transform: "scaleX(-1)" }} />
-
+        <BackGroundImg/>
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 relative z-10">
 
 
@@ -257,20 +255,8 @@ export default function CartPage() {
 
         {cartItems.length === 0 ? (
           <div>
-            <div
-              className="absolute right-0 top-1.5  w-full h-[60%] opacity-60 pointer-events-none"
-              style={{
-                backgroundImage: `url(${assets.HeroDesign})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-              }}
-            />
-            <img src={assets.Empty_cart} alt="cart-section" className='ml-25 mt-25' />
-            <p className=" text-center mt-2 font-bold">
-              Your cart is empty
-            </p>
-            <p className='text-center'>Looks like you haven’t added <br /> anything to your cart yet </p>
-          </div>
+            <BackGroundImg/>
+            </div>
         ) : (
           cartItems.map((item) => (
             <MobileCartCard

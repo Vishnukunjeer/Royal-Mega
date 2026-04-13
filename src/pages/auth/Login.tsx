@@ -6,18 +6,17 @@ import { toast } from "react-hot-toast"
 import { useDispatch, } from "react-redux"
 import { useGetUserQuery, useLoginMutation } from "@/sevices/api"
 import {setCredentials } from "@/store/slices/authSlice"
+
 type ErrorType = {
   email?: string
   password?: string
 }
 
-
-
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [error, setError] = useState<ErrorType>({})
+  const [error] = useState<ErrorType>({})
   const [login, {isLoading}] = useLoginMutation();
 
   const navigate = useNavigate();
@@ -58,9 +57,9 @@ const Login = () => {
   }
  const token = localStorage.getItem("token");
 
-const { data: user } = useGetUserQuery(undefined, {
-  skip: !token,
-});
+  useGetUserQuery(undefined, {
+    skip: !token,
+  });
 
 
   return (

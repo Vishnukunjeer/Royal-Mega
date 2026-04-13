@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import {Autoplay} from "swiper/modules"
 import "swiper/css";
 import { useRef } from "react";
+import { BackGroundImg } from "@/components/common/backGroundImg";
 
 
 const Hero: React.FC = () => {
@@ -25,23 +26,7 @@ const numbers = [1, 2, 3, 4, 5];
     <SwiperSlide>
     <section className="relative w-full h-full bg-black-100 text-white border-b-2 border-[#d4af37] overflow-hidden ">
       
-      <div
-        className="absolute left-0 top-0 w-[40%] h-full opacity-80 pointer-events-none"
-        style={{
-          backgroundImage: `url(${assets.HeroDesign})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "contain",
-        }}
-      />
-      <div
-        className="absolute right-0 top-0 w-[40%] h-full opacity-80 pointer-events-none"
-        style={{
-          backgroundImage: `url(${assets.HeroDesign})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "contain",
-          transform: "scaleX(-1)",
-        }}
-      />
+      <BackGroundImg/>
 
       <div className="flex flex-row items-center justify-between px-4 sm:px-4 lg:px-10 py-4 mt-6">
         
@@ -92,23 +77,7 @@ const numbers = [1, 2, 3, 4, 5];
   <div className="border-b-2 border-primary relative overflow-hidden h-full">
 
     {/* Background decorations */}
-    <div
-      className="absolute left-0 top-0 w-[40%] h-full opacity-60 pointer-events-none"
-      style={{
-        backgroundImage: `url(${assets.HeroDesign})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "contain",
-      }}
-    />
-    <div
-      className="absolute right-0 top-0 w-[40%] h-full opacity-60 pointer-events-none"
-      style={{
-        backgroundImage: `url(${assets.HeroDesign})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "contain",
-        transform: "scaleX(-1)",
-      }}
-    />
+    <BackGroundImg/>
     <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_30%,#d4af37,transparent_40%)]" />
     <div className="relative flex sm:hidden flex-row items-center justify-between px-2 py-1 h-50 gap-1 text-white">
 

@@ -1,6 +1,7 @@
 
 import { assets } from "@/assets/assets"
 import MobileFooter from "@/layouts/Mobile"
+import { BackGroundImg  } from "@/components/common/backGroundImg"
 
 const About = () => {
   return (
@@ -8,25 +9,8 @@ const About = () => {
       
 
       <div className="max-w-7xl mx-auto px-6 py-20 flex flex-col lg:flex-row items-center gap-12">
-
-        <div
-                className="absolute left-0 top-0 w-[40%] h-full opacity-80 pointer-events-none"
-                style={{
-                  backgroundImage: `url(${assets.HeroDesign})`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "6xl",
-                }}
-              />
-              <div
-                className="absolute right-0 top-0 w-[40%] h-full opacity-80 pointer-events-none"
-                style={{
-                  backgroundImage: `url(${assets.HeroDesign})`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "6xl",
-                  transform: "scaleX(-1)",
-                }}
-              />
-
+      
+        <BackGroundImg />
         <div className="flex-1 flex justify-center">
           <img
             src={assets.lotto || "/lotto.png"}

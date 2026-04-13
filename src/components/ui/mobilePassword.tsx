@@ -58,10 +58,7 @@ export const MobilePassword = () => {
           backgroundImage: `url(${assets.HeroDesign})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "contain",
-        }}
-
-
-      />
+        }}    />
       <div className="flex items-center gap-3 bg-primary   text-black px-4 py-3 rounded pb-5">
         <button onClick={() => navigate(-1)}>←</button>
         <h1 className="font-semibold text-xl">Change Password</h1>
