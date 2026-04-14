@@ -4,7 +4,7 @@ import { assets } from "@/assets/assets"
 import { useNavigate, Link } from "react-router-dom"
 import { toast } from "react-hot-toast"
 import { useDispatch, } from "react-redux"
-import { useGetUserQuery, useLoginMutation } from "@/sevices/api"
+import { useGetUserQuery, useLoginMutation } from "@/api/api"
 import {setCredentials } from "@/store/slices/authSlice"
 
 type ErrorType = {

@@ -1,22 +1,25 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/store/slices/cartSlice";
+import { toast } from "react-hot-toast";
 
 const TOTAL_MAIN = 69;
 const TOTAL_MEGA = 26;
 const MAX_MAIN = 5;
 
 const LottoDetails = () => {
-  const [mainBalls, setMainBalls] = useState<number[]>([4, 16, 22, 30, 38]);
-  const [megaBall, setMegaBall] = useState<number | null>(26);
-
+  const [mainBalls, setMainBalls] = useState<number[]>([]);;
+  const [megaBall, setMegaBall] = useState<number | null>(null);;
+  const dispatch = useDispatch();
   // 🎯 SELECT / REMOVE MAIN BALL
   const toggleMain = (num: number) => {
-    if (mainBalls.includes(num)) {
-      setMainBalls(mainBalls.filter((n) => n !== num)); // ❌ remove
-    } else if (mainBalls.length < MAX_MAIN) {
-      setMainBalls([...mainBalls, num].sort((a, b) => a - b)); // ✅ add
-    }
-  };
+  if (mainBalls.includes(num)) {
+    setMainBalls(mainBalls.filter((n) => n !== num)); 
+  } else if (mainBalls.length < MAX_MAIN) {
+    setMainBalls([...mainBalls, num]);
+  }
+};
 
   const navigate = useNavigate()
 
@@ -41,9 +44,27 @@ const LottoDetails = () => {
     setMainBalls(Array.from(set).sort((a, b) => a - b));
     setMegaBall(Math.floor(Math.random() * TOTAL_MEGA) + 1);
   };
+  const handleAddToCart = () => {
+  if (mainBalls.length !== MAX_MAIN || !megaBall) {
+    toast.error("Please select 5 numbers and 1 mega ball 🎯");
+    return;
+  }
+
+  dispatch(addToCart({
+    drawName: "Royal Lotto",
+    sequence: { main: mainBalls, mega: megaBall },
+    price: 40,
+  }));
+
+  toast.success("Added to cart 🛒");
+
+  // ✅ clear after adding
+  clearAll();
+};
+  
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white mb-20">
 
       {/*   */}
       <div className="bg-primary   text-black px-4 py-3 flex items-center gap-3 font-semibold ">
@@ -147,7 +168,7 @@ const LottoDetails = () => {
           Entry ₹40
         </div>
 
-        <button className="bg-primary   text-black px-6 py-2 rounded-full font-bold">
+        <button className="bg-primary   text-black px-6 py-2 rounded-full font-bold" onClick={handleAddToCart}>
           Add To Cart
         </button>
       </div>

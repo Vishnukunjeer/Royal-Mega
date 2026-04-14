@@ -10,9 +10,8 @@ const formatNumber = (num: number) => num.toString().padStart(2, '0');
 
 export default function LottoSection() {
   const dispatch = useDispatch();
-
-  const [selectedMain, setSelectedMain] = useState<number[]>([4, 16, 22, 30, 38]);
-  const [selectedMega, setSelectedMega] = useState<number | null>(6);
+  const [selectedMain, setSelectedMain] = useState<number[]>([]);
+  const [selectedMega, setSelectedMega] = useState<number | null>();
   const [activeDrawIndex, setActiveDrawIndex] = useState(0);
 
   // Timer State
@@ -44,7 +43,7 @@ export default function LottoSection() {
     if (selectedMain.includes(num)) {
       setSelectedMain(selectedMain.filter((n) => n !== num));
     } else if (selectedMain.length < MAX_MAIN_BALLS) {
-      setSelectedMain([...selectedMain, num].sort((a, b) => a - b));
+      setSelectedMain([...selectedMain, num]);
     }
   };
 
@@ -62,7 +61,7 @@ export default function LottoSection() {
     while (newMain.size < MAX_MAIN_BALLS) {
       newMain.add(Math.floor(Math.random() * TOTAL_MAIN_NUMBERS) + 1);
     }
-    setSelectedMain(Array.from(newMain).sort((a, b) => a - b));
+    setSelectedMain(Array.from(newMain));
     setSelectedMega(Math.floor(Math.random() * TOTAL_MEGA_NUMBERS) + 1);
   };
 

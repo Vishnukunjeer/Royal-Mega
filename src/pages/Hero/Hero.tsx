@@ -21,17 +21,17 @@ const numbers = [1, 2, 3, 4, 5];
     disableOnInteraction: false,
   }}
   loop={true}
-  className="h-52 sm:h-40 lg:h-120"
+  className="h-52 sm:h-30 lg:h-125"
 >
     <SwiperSlide>
-    <section className="relative w-full h-full bg-black-100 text-white border-b-2 border-[#d4af37] overflow-hidden ">
+    <section className="relative w-full h-full bg-black-100 text-white border-b-2 border-primary overflow-hidden ">
       
       <BackGroundImg/>
 
-      <div className="flex flex-row items-center justify-between px-4 sm:px-4 lg:px-10 py-4 mt-6">
+      <div className="flex flex-row items-center justify-between px-4 sm:px-4 lg:px-10 py-4 mt-10">
         
         <div className="w-[57%] sm:w-[45%] lg:w-[30%] ">
-          <h1 className="text-[#f8dc65] text-lg lg:text-3xl sm:text-xs font-bold ">
+          <h1 className="text-primary text-lg lg:text-3xl sm:text-xs font-bold ">
             Royal Lotto
           </h1>
           <p className="text-gray-300 text-[8px] sm:text-xs lg:text-xs leading-snug">
@@ -56,10 +56,10 @@ const numbers = [1, 2, 3, 4, 5];
           </button>
         </div>
 
-        <div className="w-[45%] h-full flex justify-end items-center">
+        <div className="w-[45%]h-full flex justify-end items-center h-20">
           <img
   src={assets.snooker_logo}
-  className="w-full h-full sm:w-30 lg:w-100 max-w-120 object-contain scale-125 sm:scale-110 lg:scale-100"
+  className="w-full h-full sm:w-40 lg:w-100 max-w-120 object-contain scale-125 sm:scale-120 lg:scale-350"
   alt="Snooker"
 />
         </div>
@@ -116,7 +116,7 @@ const numbers = [1, 2, 3, 4, 5];
       {/* Center Text */}
       <div className="flex flex-col gap-1 flex-1 min-w-0">
         <h1 className="text-xs font-semibold leading-tight">Lottery</h1>
-        <p className="text-gray-300 text-[8px] leading-snug line-clamp-4">
+        <p className="text-gray-300 text-[8px] leading-snug line-clamp-5">
           Join the excitement with Royal Mega's Lottery games, offering you
           the chance to turn dreams into reality with every ticket.
           Whether you're playing for fun or aiming for a life-changing win,
@@ -133,7 +133,7 @@ const numbers = [1, 2, 3, 4, 5];
         </button>
       </div>
 
-      <div className="shrink-0 w-14">
+      <div className="shrink-0 w-20 sm:w-25">
         <img
           src={assets.snooker_logo}
           className="w-full h-full object-contain"

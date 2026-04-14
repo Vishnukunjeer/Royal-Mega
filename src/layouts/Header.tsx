@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { ShoppingBag, ChevronDown } from "lucide-react"
 import { assets } from "../assets/assets"
 import type { RootState } from "@/store/store"
-import { useGetUserQuery } from "@/sevices/api";
+import { useGetUserQuery } from "@/api/api";
 import { useDispatch ,useSelector} from "react-redux";
 import { logout } from "@/store/slices/authSlice";
 

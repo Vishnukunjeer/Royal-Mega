@@ -4,7 +4,7 @@ import { assets } from "@/assets/assets"
 import { Calendar, CircleUser, Wallet, ScrollText, Settings } from "lucide-react"
 import MobileFooter from "@/layouts/Mobile"
 import { MobileProfile } from "@/components/ui/mobileProfile"
-import { useGetUserQuery } from "@/sevices/api";
+import { useGetUserQuery } from "@/api/api";
 
 const Profile = () => {
   const [menuOpen, setMenuOpen] = useState(false)
